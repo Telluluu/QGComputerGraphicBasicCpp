@@ -52,21 +52,22 @@ public:
 #ifdef FLL_OPTERATE_ON_THIS_FEATURE
 	//default insert to the end of the list
 	void Insert(const T& val, const iterator& iter = nullptr);
-	void Remove(const iterator& iter);
+	void Erase(const iterator& iter);
 #else
 	//default insert to the end of the list
 	void Insert(const T& val, const iterator& prev_iter = nullptr);
-	void Remove(const iterator& prev_iter);
+	void Erase(const iterator& prev_iter);
 #endif
 #else
 	//default insert to the end of the list
 	void Insert(const T& val, T* prev_node = nullptr);
 	//default insert to the head of the list
-	void Remove(T* prev_node = nullptr);
+	void Erase(T* prev_node = nullptr);
 #endif
 
 	T& Front();
 	T& Back();
+	void PushFront();
 
 	size_t Count();
 	bool Empty();

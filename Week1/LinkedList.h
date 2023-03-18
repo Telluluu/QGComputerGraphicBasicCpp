@@ -47,11 +47,11 @@ public:
 #ifdef LL_ITERATOR_FEATURE
 	//default insert after iter
 	void Insert(const T& val, const iterator& iter, bool insert_prev = false);
-	iterator Remove(const iterator& iter);
+	iterator Erase(const iterator& iter);
 #else
 	//default insert after node
 	void Insert(const T& val, T* node, bool insert_prev = false);
-	T* Remove(T* node);
+	T* Erase(T* node);
 #endif
 
 	T& Front();
