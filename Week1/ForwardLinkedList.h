@@ -67,7 +67,9 @@ public:
 
 	T& Front();
 	T& Back();
-	void PushFront();
+	void PushFront(const T& val);
+	void PushBack(const T& val);
+	void PopFront();
 
 	size_t Count();
 	bool Empty();
