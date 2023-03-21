@@ -20,9 +20,9 @@ int main()
 	e.Insert(4, 4);     //中间再插入两个结点，插在第4，5结点
 	e.Insert(5, 5);
 	e.Print();          //打印链表内容
-	e.Erase(3);
-	e.Erase(1);
-	e.Erase((int)e.Count());
+	e.Erase(3);         //删除第三个结点
+	e.PopFront();      //删除第一个结点
+	e.PopBack();         //删除最后一个结点
 	e.Print();
 	cout << e.MidFinder()->data << endl;     //找到中间结点(其中调用empty函数检查链表是否为空),并打印data
 	e.Clear();
@@ -41,6 +41,9 @@ int main()
 	d.PushBack(8);
 	d.Insert(4, 4);     //中间再插入两个结点，插在第4，5结点
 	d.Insert(5, 5);
+	d.Erase(2);
+	d.PopFront();       //删除第一个结点
+	d.PopBack();        //删除最后一个结点
 	cout << endl;
 	d.Print();          //打印链表内容
 	cout << d.MidFinder()->data << endl;     //找到中间结点(其中调用empty函数检查链表是否为空),并打印data

@@ -262,15 +262,27 @@ void LinkedList<T>::Erase(int pos) //pos为要删除结点的序号
 }
 
 template<class T>
-void LinkedList<T>::PushFront(const T& val)
+void LinkedList<T>::PushFront(const T& val)   //头插，并给D_data赋值val
 {
 	Insert(val, 1);
 }
 
 template<class T>
-void LinkedList<T>::PushBack(const T& val)
+void LinkedList<T>::PushBack(const T& val)     //尾插，并给D_data赋值val
 {
-	Insert(val, (int)Count()+1);
+	Insert(val, (int)Count()+1); 
+}
+
+template<class T>
+void LinkedList<T>::PopFront()      //删除第一个结点
+{
+	Erase(1);
+}
+
+template<class T>
+void LinkedList<T>::PopBack()      //删除最后一个结点
+{
+	Erase(Count());
 }
 
 template<class T>

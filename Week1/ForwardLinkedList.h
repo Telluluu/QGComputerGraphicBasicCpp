@@ -92,6 +92,7 @@ public:
 	void PushFront(const T& val);
 	void PushBack(const T& val);
 	void PopFront();
+	void PopBack();
 
 	size_t Count();
 	bool Empty();
@@ -255,15 +256,27 @@ void ForwardLinkedList<T>::Erase(int pos)
 //}
 
 template<class T>
-void ForwardLinkedList<T>::PushFront(const T& val)
-{
+void ForwardLinkedList<T>::PushFront(const T& val)  //头插，并给data赋值val
+{ 
 	Insert(val, 1);      //头插
 }
 
 template<class T>
-void ForwardLinkedList<T>::PushBack(const T& val)
+void ForwardLinkedList<T>::PushBack(const T& val)  //尾插，并给data赋值val
 {
 	Insert(val, (int)Count() + 1);           //调用Count函数计算结点个数，加一实现尾插
+}
+
+template<class T>
+void ForwardLinkedList<T>::PopFront()  //删除第一个结点
+{
+	Erase(1);
+}
+
+template<class T>
+void ForwardLinkedList<T>::PopBack()  //删除最后一个结点
+{
+	Erase(Count());
 }
 
 template<class T>
