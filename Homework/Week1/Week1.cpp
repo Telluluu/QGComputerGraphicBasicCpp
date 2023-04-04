@@ -1,30 +1,30 @@
-#include "LinkedList.h"
+ï»¿#include "LinkedList.h"
 #include "ForwardLinkedList.h"
 #include <iostream>
 
 using namespace std;
 
-//ÁõêØìÇ-3122004746
+//åˆ˜æ›¦çƒ¨-3122004746
 
 int main()
 {
 	cout << "Now test ForwardLinkedList" << endl;
 	ForwardLinkedList<int> e;
-	e.Print();           //´òÓ¡Á´±íÖĞµÄdata,(Ìø¹ıÍ·½áµã)
-	e.PushFront(3);      //·Ö±ğÇ°²å3£¬2£¬1
+	e.Print();           //æ‰“å°é“¾è¡¨ä¸­çš„data,(è·³è¿‡å¤´ç»“ç‚¹)
+	e.PushFront(3);      //åˆ†åˆ«å‰æ’3ï¼Œ2ï¼Œ1
 	e.PushFront(2);
 	e.PushFront(1);
-	e.PushBack(6);      //·Ö±ğÎ²²å6£¬7£¬8
+	e.PushBack(6);      //åˆ†åˆ«å°¾æ’6ï¼Œ7ï¼Œ8
 	e.PushBack(7);
 	e.PushBack(8);
-	e.Insert(4, 4);     //ÖĞ¼äÔÙ²åÈëÁ½¸ö½áµã£¬²åÔÚµÚ4£¬5½áµã
+	e.Insert(4, 4);     //ä¸­é—´å†æ’å…¥ä¸¤ä¸ªç»“ç‚¹ï¼Œæ’åœ¨ç¬¬4ï¼Œ5ç»“ç‚¹
 	e.Insert(5, 5);
-	e.Print();          //´òÓ¡Á´±íÄÚÈİ
-	e.Erase(3);         //É¾³ıµÚÈı¸ö½áµã
-	e.PopFront();      //É¾³ıµÚÒ»¸ö½áµã
-	e.PopBack();         //É¾³ı×îºóÒ»¸ö½áµã
+	e.Print();          //æ‰“å°é“¾è¡¨å†…å®¹
+	e.Erase(3);         //åˆ é™¤ç¬¬ä¸‰ä¸ªç»“ç‚¹
+	e.PopFront();      //åˆ é™¤ç¬¬ä¸€ä¸ªç»“ç‚¹
+	e.PopBack();         //åˆ é™¤æœ€åä¸€ä¸ªç»“ç‚¹
 	e.Print();
-	cout << e.MidFinder()->data << endl;     //ÕÒµ½ÖĞ¼ä½áµã(ÆäÖĞµ÷ÓÃemptyº¯Êı¼ì²éÁ´±íÊÇ·ñÎª¿Õ),²¢´òÓ¡data
+	cout << e.MidFinder()->data << endl;     //æ‰¾åˆ°ä¸­é—´ç»“ç‚¹(å…¶ä¸­è°ƒç”¨emptyå‡½æ•°æ£€æŸ¥é“¾è¡¨æ˜¯å¦ä¸ºç©º),å¹¶æ‰“å°data
 	e.Clear();
 	cout << "ForwardLinkedList test over" << endl;
 
@@ -32,21 +32,21 @@ int main()
 
 	cout << "Now test LinkedList" << endl;
 	LinkedList<int> d;
-	d.Print();           //´òÓ¡Á´±íÖĞµÄdata
-	d.PushFront(3);      //·Ö±ğÇ°²å3£¬2£¬1
+	d.Print();           //æ‰“å°é“¾è¡¨ä¸­çš„data
+	d.PushFront(3);      //åˆ†åˆ«å‰æ’3ï¼Œ2ï¼Œ1
 	d.PushFront(2);
 	d.PushFront(1);
-	d.PushBack(6);      //·Ö±ğÎ²²å6£¬7£¬8
+	d.PushBack(6);      //åˆ†åˆ«å°¾æ’6ï¼Œ7ï¼Œ8
 	d.PushBack(7);
 	d.PushBack(8);
-	d.Insert(4, 4);     //ÖĞ¼äÔÙ²åÈëÁ½¸ö½áµã£¬²åÔÚµÚ4£¬5½áµã
+	d.Insert(4, 4);     //ä¸­é—´å†æ’å…¥ä¸¤ä¸ªç»“ç‚¹ï¼Œæ’åœ¨ç¬¬4ï¼Œ5ç»“ç‚¹
 	d.Insert(5, 5);
 	d.Erase(2);
-	d.PopFront();       //É¾³ıµÚÒ»¸ö½áµã
-	d.PopBack();        //É¾³ı×îºóÒ»¸ö½áµã
+	d.PopFront();       //åˆ é™¤ç¬¬ä¸€ä¸ªç»“ç‚¹
+	d.PopBack();        //åˆ é™¤æœ€åä¸€ä¸ªç»“ç‚¹
 	cout << endl;
-	d.Print();          //´òÓ¡Á´±íÄÚÈİ
-	cout << d.MidFinder()->data << endl;     //ÕÒµ½ÖĞ¼ä½áµã(ÆäÖĞµ÷ÓÃemptyº¯Êı¼ì²éÁ´±íÊÇ·ñÎª¿Õ),²¢´òÓ¡data
+	d.Print();          //æ‰“å°é“¾è¡¨å†…å®¹
+	cout << d.MidFinder()->data << endl;     //æ‰¾åˆ°ä¸­é—´ç»“ç‚¹(å…¶ä¸­è°ƒç”¨emptyå‡½æ•°æ£€æŸ¥é“¾è¡¨æ˜¯å¦ä¸ºç©º),å¹¶æ‰“å°data
 	d.Clear();
 	cout << "LinkedList test over" << endl;
 

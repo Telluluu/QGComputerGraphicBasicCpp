@@ -22,13 +22,13 @@ private:
 	StackNode<T>* m_top = nullptr;
 
 public:
-	int InitStack() //Á´Õ»µÄ³õÊ¼»¯
+	int InitStack() //é“¾æ ˆçš„åˆå§‹åŒ–
 	{
 		m_top = nullptr;
 		return 1;
 	}
 
-	int Push(const T& data)  //ÈëÕ»
+	int Push(const T& data)  //å…¥æ ˆ
 	{
 		StackNode<T>* pt = new StackNode<T>;
 		pt->data = data;
@@ -37,7 +37,7 @@ public:
 		return 1;
 	}
 
-	int Push(T& data)  //ÈëÕ»
+	int Push(T& data)  //å…¥æ ˆ
 	{
 		StackNode<T>* pt = new StackNode<T>;
 		pt->data = data;
@@ -46,11 +46,11 @@ public:
 		return 1;
 	}
 
-	int Pop() //³öÕ»
+	int Pop() //å‡ºæ ˆ
 	{
 		if (m_top == nullptr)
 		{
-			std::cout << "¿ÕÕ»" << std::endl;
+			std::cout << "ç©ºæ ˆ" << std::endl;
 			return 0;
 		}
 		StackNode<T>* pt = m_top;
@@ -59,28 +59,28 @@ public:
 		return 1;
 	}
 
-	T GetStackTop()//È¡Õ»¶¥ÔªËØµÄÊı¾İ£¬²»¸Ä±äÕ»
+	T GetStackTop()//å–æ ˆé¡¶å…ƒç´ çš„æ•°æ®ï¼Œä¸æ”¹å˜æ ˆ
 	{
 		if (m_top != nullptr)
 			return m_top->data;
 		return 0;
 	}
 
-	int StackTravel()//±éÀúÕ»
+	int StackTravel()//éå†æ ˆ
 	{
 		if (m_top == nullptr)
 		{
-			std::cout << "¿ÕÕ»" << std::endl;
+			std::cout << "ç©ºæ ˆ" << std::endl;
 			return 0;
 		}
 		StackNode<T>* pt = m_top;
-		std::cout << "¡ıÕ»¶¥¡ı" << std::endl;
+		std::cout << "â†“æ ˆé¡¶â†“" << std::endl;
 		while (pt != nullptr)
 		{
 			std::cout << " " << pt->data << " " << std::endl;
 			pt = pt->next;
 		}
-		std::cout << "±éÀú½áÊø" << std::endl;
+		std::cout << "éå†ç»“æŸ" << std::endl;
 		return 1;
 	}
 	bool IsEmpty()

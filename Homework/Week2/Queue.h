@@ -1,13 +1,13 @@
-#pragma once
+ï»¿#pragma once
 #include <iostream>
 
 template<class T>
-class QueueNode //¶ÓÁĞ½áµã
+class QueueNode //é˜Ÿåˆ—ç»“ç‚¹
 {
 public:
 	T data;
 	QueueNode<T>* next;
-	QueueNode(T input_data, QueueNode<T>* pt = nullptr)  //¹¹Ôìº¯Êı
+	QueueNode(T input_data, QueueNode<T>* pt = nullptr)  //æ„é€ å‡½æ•°
 	{
 		data = input_data;
 		next = pt;
@@ -22,25 +22,25 @@ private:
 	QueueNode<T>* _back;
 
 public:
-	Queue() //¹¹Ôìº¯Êı£¬³õÊ¼»¯¶ÓÁĞÊ×Î²½áµãÎª¿Õ
+	Queue() //æ„é€ å‡½æ•°ï¼Œåˆå§‹åŒ–é˜Ÿåˆ—é¦–å°¾ç»“ç‚¹ä¸ºç©º
 	{
 		_front = nullptr;
 		_back = nullptr;
 	}
 
-	~Queue() //Îö¹¹º¯Êı£¬µ÷ÓÃDeleteº¯Êı
+	~Queue() //ææ„å‡½æ•°ï¼Œè°ƒç”¨Deleteå‡½æ•°
 	{
 		Delete();
 	}
 
-	bool PushQueue(T data) //ÈëÁĞ
+	bool PushQueue(T data) //å…¥åˆ—
 	{
 		if (_front == nullptr)
 		{
 			_front = _back = new QueueNode<T>(data);
 			if (_front == nullptr)
 			{
-				std::cout << "´´½¨Ê§°Ü" << std::endl;
+				std::cout << "åˆ›å»ºå¤±è´¥" << std::endl;
 				return 0;
 			}
 		}
@@ -52,56 +52,56 @@ public:
 
 			if (_back == nullptr)
 			{
-				std::cout << "´´½¨Ê§°Ü" << std::endl;
+				std::cout << "åˆ›å»ºå¤±è´¥" << std::endl;
 				return 0;
 			}
 		}
 		return 1;
 	}
 
-	bool PopQueue() //³öÁĞ
+	bool PopQueue() //å‡ºåˆ—
 	{
-		if (IsEmpty())//Èô¶ÓÁĞÎª¿Õ
+		if (IsEmpty())//è‹¥é˜Ÿåˆ—ä¸ºç©º
 		{
-			std::cout << "¶ÓÁĞÎª¿Õ£¬³öÁĞÊ§°Ü" << std::endl;
+			std::cout << "é˜Ÿåˆ—ä¸ºç©ºï¼Œå‡ºåˆ—å¤±è´¥" << std::endl;
 			return 0;
 		}
 		else
 		{
 			QueueNode<T>* popnode = _front;
 			_front = _front->next;
-			std::cout << "Òª³öÁĞµÄ¶ÓÊ×ÔªËØÎª:" << popnode->data << std::endl;
+			std::cout << "è¦å‡ºåˆ—çš„é˜Ÿé¦–å…ƒç´ ä¸º:" << popnode->data << std::endl;
 			delete(popnode);
 			return 1;
 		}
 	}
 
-	T GetFront()  //»ñÈ¡¶ÓÊ×ÔªËØ
+	T GetFront()  //è·å–é˜Ÿé¦–å…ƒç´ 
 	{
 		if (IsEmpty())
 		{
-			std::cout << "¶ÓÁĞÎª¿Õ£¬»ñÈ¡Ê§°Ü" << std::endl;
+			std::cout << "é˜Ÿåˆ—ä¸ºç©ºï¼Œè·å–å¤±è´¥" << std::endl;
 			return 0;
 		}
 		else
 		{
-			std::cout << "¶ÓÊ×ÔªËØÎª:" << _front->data << std::endl;
+			std::cout << "é˜Ÿé¦–å…ƒç´ ä¸º:" << _front->data << std::endl;
 			return _front->data;
 		}
 	}
 
-	bool IsEmpty() //ÅĞ¶Ï¶ÓÁĞÊÇ·ñÎª¿Õ
+	bool IsEmpty() //åˆ¤æ–­é˜Ÿåˆ—æ˜¯å¦ä¸ºç©º
 	{
-		if (_front == nullptr) //¶ÓÊ×Îª¿Õ·µ»Ø1£¬·ñÔò·µ»Ø0
+		if (_front == nullptr) //é˜Ÿé¦–ä¸ºç©ºè¿”å›1ï¼Œå¦åˆ™è¿”å›0
 			return 1;
 		else return 0;
 	}
 
-	bool Delete() //É¾³ı¶ÓÁĞ
+	bool Delete() //åˆ é™¤é˜Ÿåˆ—
 	{
 		if (IsEmpty())
 		{
-			std::cout << "¶ÓÁĞÎª¿Õ£¬É¾³ıÊ§°Ü" << std::endl;
+			std::cout << "é˜Ÿåˆ—ä¸ºç©ºï¼Œåˆ é™¤å¤±è´¥" << std::endl;
 			return 0;
 		}
 		else
@@ -110,25 +110,25 @@ public:
 			{
 				_back = _front;
 				_front = _front->next;
-				std::cout << "¼´½«É¾³ı¶ÓÁĞ½áµãÔªËØÎª:" << _back->data << std::endl;
+				std::cout << "å³å°†åˆ é™¤é˜Ÿåˆ—ç»“ç‚¹å…ƒç´ ä¸º:" << _back->data << std::endl;
 				delete(_back);
 			}
-			std::cout << "É¾³ı³É¹¦" << std::endl;
+			std::cout << "åˆ é™¤æˆåŠŸ" << std::endl;
 			return 1;
 		}
 	}
 
-	int GetSize() //»ñÈ¡¶ÓÁĞ³¤¶È
+	int GetSize() //è·å–é˜Ÿåˆ—é•¿åº¦
 	{
 		if (IsEmpty())
 		{
-			std::cout << "¶ÓÁĞÎª¿Õ" << std::endl;
+			std::cout << "é˜Ÿåˆ—ä¸ºç©º" << std::endl;
 			return 0;
 		}
 		else
 		{
 			QueueNode<T>* pt = _front;
-			int count = 0; //½áµã¼ÆÊı·û
+			int count = 0; //ç»“ç‚¹è®¡æ•°ç¬¦
 			while (pt != nullptr)
 			{
 				count++;
@@ -138,7 +138,7 @@ public:
 		}
 	}
 
-	T GetData(int num) //»ñÈ¡µÚÈÎÒâ¸ö¶ÓÁĞ½áµãÊı¾İ
+	T GetData(int num) //è·å–ç¬¬ä»»æ„ä¸ªé˜Ÿåˆ—ç»“ç‚¹æ•°æ®
 	{
 		if (num > GetSize() || num <= 0)
 		{
@@ -159,21 +159,21 @@ public:
 		}
 	}
 
-	void Travel() //Àú±é¶ÓÁĞ
+	void Travel() //å†éé˜Ÿåˆ—
 	{
 		if (IsEmpty())
 		{
-			std::cout << "¶ÓÁĞÎª¿Õ£¬ÎŞ·¨±éÀú" << std::endl;
+			std::cout << "é˜Ÿåˆ—ä¸ºç©ºï¼Œæ— æ³•éå†" << std::endl;
 			return;
 		}
 		QueueNode<T>* pt = _front;
-		std::cout << "¡ıÕâÊÇ¶ÓÊ×¡ı" << std::endl;
+		std::cout << "â†“è¿™æ˜¯é˜Ÿé¦–â†“" << std::endl;
 		while (pt != nullptr)
 		{
-			std::cout << "¸Ã¶ÓÁĞ½áµãÔªËØÎª" << pt->data << std::endl;
+			std::cout << "è¯¥é˜Ÿåˆ—ç»“ç‚¹å…ƒç´ ä¸º" << pt->data << std::endl;
 			pt = pt->next;
 		}
-		std::cout << "¡üÕâÊÇ¶ÓÎ²¡ü" << std::endl;
+		std::cout << "â†‘è¿™æ˜¯é˜Ÿå°¾â†‘" << std::endl;
 		return;
 	}
 };

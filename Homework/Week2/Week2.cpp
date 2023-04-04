@@ -1,4 +1,4 @@
-#include<iostream>
+ï»¿#include<iostream>
 #include"LinkStack.h"
 #include"Queue.h"
 #include<stdio.h>
@@ -7,48 +7,48 @@
 
 int main()
 {
-	//ÓÃorderÀ´´æ´¢ÊäÈëÖ¸Áî
+	//ç”¨orderæ¥å­˜å‚¨è¾“å…¥æŒ‡ä»¤
 	int order = 0;
-	//ÅĞ¶ÏÊäÈëÊÇ·ñºÏ·¨
+	//åˆ¤æ–­è¾“å…¥æ˜¯å¦åˆæ³•
 	while (1)
 	{
 		using namespace std;
-		cout << "ÇëÊäÈëÖ¸Áî" << endl;
-		cout << "1.²âÊÔÁ´Õ»  2.ËÄÔòÔËËã¼ÆËãÆ÷  3.²âÊÔ¶ÓÁĞ  4.ÍË³ö" << endl;
+		cout << "è¯·è¾“å…¥æŒ‡ä»¤" << endl;
+		cout << "1.æµ‹è¯•é“¾æ ˆ  2.å››åˆ™è¿ç®—è®¡ç®—å™¨  3.æµ‹è¯•é˜Ÿåˆ—  4.é€€å‡º" << endl;
 		cin >> order;
 		if (std::cin.good())
 		{
 			if (order > 0 && order <= 4)
 				break;
-			else cout << "ÊäÈë´íÎó£¬ÇëÖØĞÂÊäÈë" << endl;
+			else cout << "è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥" << endl;
 		}
 		else
 		{
-			cout << "ÊäÈë´íÎó£¬ÇëÖØĞÂÊäÈë" << endl;
+			cout << "è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥" << endl;
 			cin.clear();
 			cin.ignore(2048, '\n');
 		}
 	}
 	if (order == 4)
 		exit(0);
-	//¸ù¾İÖ¸ÁîÑ¡Ôñ¹¦ÄÜ
+	//æ ¹æ®æŒ‡ä»¤é€‰æ‹©åŠŸèƒ½
 	switch (order)
 	{
 	case 1:
-		//Á´Õ»²âÊÔstd::cout << "Á´Õ»²âÊÔ" << std::endl;
+		//é“¾æ ˆæµ‹è¯•std::cout << "é“¾æ ˆæµ‹è¯•" << std::endl;
 	{
 		Stack<int> test_stack;
 		while (1)
 		{
-			std::cout << "1.Á´Õ»³õÊ¼»¯  2.ÈëÕ»  3.³öÕ» 4.ÌáÈ¡Õ»¶¥ÔªËØ 5.±éÀúÕ» 6.ÍË³ö" << std::endl;
-			std::cout << "ÇëÊäÈëÖ¸Áî" << std::endl;
+			std::cout << "1.é“¾æ ˆåˆå§‹åŒ–  2.å…¥æ ˆ  3.å‡ºæ ˆ 4.æå–æ ˆé¡¶å…ƒç´  5.éå†æ ˆ 6.é€€å‡º" << std::endl;
+			std::cout << "è¯·è¾“å…¥æŒ‡ä»¤" << std::endl;
 			std::cin >> order;
 			switch (order)
 			{
 			case 1:
 			{
 				test_stack.InitStack();
-				std::cout << "Á´Õ»³õÊ¼»¯³É¹¦" << std::endl;
+				std::cout << "é“¾æ ˆåˆå§‹åŒ–æˆåŠŸ" << std::endl;
 				break;
 			}
 			case 2:
@@ -56,7 +56,7 @@ int main()
 				int data = 0;
 				while (1)
 				{
-					std::cout << "ÇëÊäÈëÒªÈëÕ»µÄÔªËØ" << std::endl;
+					std::cout << "è¯·è¾“å…¥è¦å…¥æ ˆçš„å…ƒç´ " << std::endl;
 					std::cin >> data;
 					if (std::cin.good())
 					{
@@ -65,12 +65,12 @@ int main()
 					}
 					else
 					{
-						std::cout << "ÊäÈë´íÎó£¬ÇëÖØĞÂÊäÈë" << std::endl;
+						std::cout << "è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥" << std::endl;
 						std::cin.clear();
 						std::cin.ignore(2048, '\n');
 					}
 				}
-				std::cout << "ÈëÕ»³É¹¦" << std::endl;
+				std::cout << "å…¥æ ˆæˆåŠŸ" << std::endl;
 				break;
 			}
 			case 3:
@@ -78,18 +78,18 @@ int main()
 				if (!test_stack.IsEmpty())
 				{
 					test_stack.Pop();
-					std::cout << "³öÕ»³É¹¦" << std::endl;
+					std::cout << "å‡ºæ ˆæˆåŠŸ" << std::endl;
 				}
-				else std::cout << "¿ÕÕ»" << std::endl;
+				else std::cout << "ç©ºæ ˆ" << std::endl;
 				break;
 			}
 			case 4:
 			{
 				int top_data = test_stack.GetStackTop();
 				if (!test_stack.IsEmpty())
-					std::cout << "ÒÑÌáÈ¡Õ»¶¥ÔªËØ" << std::endl;
+					std::cout << "å·²æå–æ ˆé¡¶å…ƒç´ " << std::endl;
 				else
-					std::cout << "¿ÕÕ»" << std::endl;
+					std::cout << "ç©ºæ ˆ" << std::endl;
 				break;
 			}
 			case 5:
@@ -99,31 +99,31 @@ int main()
 			}
 			case 6:exit(0);
 			default:
-				std::cout << "ÊäÈë´íÎó£¬ÇëÖØĞÂÊäÈë" << std::endl;
+				std::cout << "è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥" << std::endl;
 				break;
 			};
 		}
 	}
-	case 2://ËÄÔòÔËËã±í´ïÊ½ÇóÖµµÄµÄ¼ÆËãÆ÷
+	case 2://å››åˆ™è¿ç®—è¡¨è¾¾å¼æ±‚å€¼çš„çš„è®¡ç®—å™¨
 	{
-		std::cout << "»¹Ã»×öºÃß÷" << std::endl;
+		std::cout << "è¿˜æ²¡åšå¥½å–µ" << std::endl;
 		break;
 	}
 	case 3:
 	{
-		//Á´Õ»²âÊÔstd::cout << "¶ÓÁĞ²âÊÔ" << std::endl;
+		//é“¾æ ˆæµ‹è¯•std::cout << "é˜Ÿåˆ—æµ‹è¯•" << std::endl;
 		Queue<int> test_queue;
 		while (1)
 		{
-			std::cout << "1.ÈëÁĞ  2.³öÁĞ  3.»ñÈ¡¶ÓÊ×ÔªËØ 4.É¾³ı¶ÓÁĞ 5.»ñÈ¡¶ÓÁĞ³¤¶È  6.»ñÈ¡µÚÈÎÒâ¸ö¶ÓÁĞ½áµãÊı¾İ 7.Àú±é¶ÓÁĞ 8.ÍË³ö" << std::endl;
-			std::cout << "ÇëÊäÈëÖ¸Áî" << std::endl;
+			std::cout << "1.å…¥åˆ—  2.å‡ºåˆ—  3.è·å–é˜Ÿé¦–å…ƒç´  4.åˆ é™¤é˜Ÿåˆ— 5.è·å–é˜Ÿåˆ—é•¿åº¦  6.è·å–ç¬¬ä»»æ„ä¸ªé˜Ÿåˆ—ç»“ç‚¹æ•°æ® 7.å†éé˜Ÿåˆ— 8.é€€å‡º" << std::endl;
+			std::cout << "è¯·è¾“å…¥æŒ‡ä»¤" << std::endl;
 			std::cin >> order;
 			switch (order)
 			{
 			case 1:
 			{
 				int i = 0;
-				std::cout << "ÇëÊäÈëÒª²åÈëµÄÊıÖµ" << std::endl;
+				std::cout << "è¯·è¾“å…¥è¦æ’å…¥çš„æ•°å€¼" << std::endl;
 				while (1)
 				{
 
@@ -132,20 +132,20 @@ int main()
 						break;
 					else
 					{
-						std::cout << "ÊäÈë´íÎó£¬ÇëÖØĞÂÊäÈë" << std::endl;
+						std::cout << "è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥" << std::endl;
 						std::cin.clear();
 						std::cin.ignore(2048, '\n');
 					}
 				}
 				test_queue.PushQueue(i);
-				std::cout << "ÈëÁĞ³É¹¦" << std::endl;
+				std::cout << "å…¥åˆ—æˆåŠŸ" << std::endl;
 				break;
 			}
 			case 2:
 			{
 				test_queue.PopQueue();
 				if (!test_queue.IsEmpty())
-					std::cout << "³öÁĞ³É¹¦" << std::endl;
+					std::cout << "å‡ºåˆ—æˆåŠŸ" << std::endl;
 				break;
 			}
 			case 3:
@@ -160,14 +160,14 @@ int main()
 			}
 			case 5:
 			{
-				std::cout << "¶ÓÁĞ³¤¶ÈÎª:" << test_queue.GetSize() << std::endl;
+				std::cout << "é˜Ÿåˆ—é•¿åº¦ä¸º:" << test_queue.GetSize() << std::endl;
 				break;
 			}
 			case 6:
 			{
 
 				int i = 0;
-				std::cout << "ÇëÊäÈëÒª»ñÈ¡µÄĞòºÅ" << std::endl;
+				std::cout << "è¯·è¾“å…¥è¦è·å–çš„åºå·" << std::endl;
 				while (1)
 				{
 
@@ -176,18 +176,18 @@ int main()
 						break;
 					else
 					{
-						std::cout << "ÊäÈë´íÎó£¬ÇëÖØĞÂÊäÈë" << std::endl;
+						std::cout << "è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥" << std::endl;
 						std::cin.clear();
 						std::cin.ignore(2048, '\n');
 					}
 				}
 				if (!test_queue.GetData(i))
 				{
-					std::cout << "¶ÓÁĞÃ»ÓĞÄÇÃ´³¤»òÊäÈëĞ¡ÓÚ1" << std::endl;
-					std::cout << "µ±Ç°¶ÓÁĞ³¤¶ÈÎª:" << test_queue.GetSize() << std::endl;
+					std::cout << "é˜Ÿåˆ—æ²¡æœ‰é‚£ä¹ˆé•¿æˆ–è¾“å…¥å°äº1" << std::endl;
+					std::cout << "å½“å‰é˜Ÿåˆ—é•¿åº¦ä¸º:" << test_queue.GetSize() << std::endl;
 					break;
 				}
-				printf("µÚ%d¸ö¶ÓÁĞ½áµãÔªËØÎª:%d\n", i, test_queue.GetData(i));
+				printf("ç¬¬%dä¸ªé˜Ÿåˆ—ç»“ç‚¹å…ƒç´ ä¸º:%d\n", i, test_queue.GetData(i));
 				break;
 			}
 			case 7:
@@ -197,7 +197,7 @@ int main()
 			}
 			case 8:exit(0);
 			default:				
-				std::cout << "ÊäÈë´íÎó£¬ÇëÖØĞÂÊäÈë" << std::endl; 
+				std::cout << "è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥" << std::endl; 
 				break;
 			};
 		}

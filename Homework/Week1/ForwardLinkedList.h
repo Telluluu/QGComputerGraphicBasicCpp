@@ -1,17 +1,17 @@
-#pragma once
+ï»¿#pragma once
 #include <iterator>
 #include<iostream>
 
 using namespace std;
 
-//¿ÉÒÔ¿¼ÂÇÈÃÕâ¸öÀàµÄÊ¹ÓÃ¸üÓÅÑÅÒ»µã
-//²»ÏëÕÛÌÚµÄÉ¾³ıÕâ¸ö¶¨Òå
-//#define FLL_ITERATOR_FEATURE ///¿ÉÑ¡	[µü´úÆ÷]
+//å¯ä»¥è€ƒè™‘è®©è¿™ä¸ªç±»çš„ä½¿ç”¨æ›´ä¼˜é›…ä¸€ç‚¹
+//ä¸æƒ³æŠ˜è…¾çš„åˆ é™¤è¿™ä¸ªå®šä¹‰
+//#define FLL_ITERATOR_FEATURE ///å¯é€‰	[è¿­ä»£å™¨]
 
 #ifdef FLL_ITERATOR_FEATURE
-//Õâ¸öÌØĞÔÒªÇóÔÚ²åÈëºÍÒÆ³ıÊ± "ÔÚĞÎÊ½ÉÏ" ÎŞĞèÇ°Ò»¸ö½Úµã£¬Ö»Ê¹ÓÃµ±Ç°½Úµã¼´¿É
-//Õâ¿ÉÒÔÈÃµ÷ÓÃ¸ü¼ÓÓÅÑÅ
-#define FLL_OPTERATE_ON_THIS_FEATURE ///¿ÉÑ¡ [Ö±½Ó²Ù×÷]
+//è¿™ä¸ªç‰¹æ€§è¦æ±‚åœ¨æ’å…¥å’Œç§»é™¤æ—¶ "åœ¨å½¢å¼ä¸Š" æ— éœ€å‰ä¸€ä¸ªèŠ‚ç‚¹ï¼Œåªä½¿ç”¨å½“å‰èŠ‚ç‚¹å³å¯
+//è¿™å¯ä»¥è®©è°ƒç”¨æ›´åŠ ä¼˜é›…
+#define FLL_OPTERATE_ON_THIS_FEATURE ///å¯é€‰ [ç›´æ¥æ“ä½œ]
 #endif
 
 template<class T>
@@ -20,7 +20,7 @@ class LNode
 public:
 	T data;
 	LNode<T>* next;
-	LNode<T>()                  //¹¹Ôìº¯Êı
+	LNode<T>()                  //æ„é€ å‡½æ•°
 	{
 		data = 0;
 		next = nullptr;
@@ -148,15 +148,15 @@ ForwardLinkedList<T>::~ForwardLinkedList()
 	//{
 	//	return;
 	//}
-	//LNode<T>* pt1 = head;   //Ç°Ö¸Õë
-	//LNode<T>* pt2 = pt1;   //ºóÖ¸Õë
+	//LNode<T>* pt1 = head;   //å‰æŒ‡é’ˆ
+	//LNode<T>* pt2 = pt1;   //åæŒ‡é’ˆ
 	//if (pt1->next != nullptr)
 	//{
 	//	pt2 = pt1;
 	//	pt1 = pt1->next;   
-	//	delete(pt2);       //É¾³ıÇ°Ò»¸ö½áµã
+	//	delete(pt2);       //åˆ é™¤å‰ä¸€ä¸ªç»“ç‚¹
 	//}
-	//delete(pt1);         //É¾³ıÄ©Î²½áµã
+	//delete(pt1);         //åˆ é™¤æœ«å°¾ç»“ç‚¹
 }
 
 //template<class T>
@@ -164,12 +164,12 @@ ForwardLinkedList<T>::~ForwardLinkedList()
 //{
 //	if (i < 0)
 //	{
-//		cout << "ÇëÊäÈëÒ»¸öÕıÕûÊı" << endl;
+//		cout << "è¯·è¾“å…¥ä¸€ä¸ªæ­£æ•´æ•°" << endl;
 //		return;
 //	}
 //	else if (i > size)
 //	{
-//		cout << "Á´±íÃ»ÓĞÄÇÃ´³¤" << endl;
+//		cout << "é“¾è¡¨æ²¡æœ‰é‚£ä¹ˆé•¿" << endl;
 //		return;
 //	}
 //	else
@@ -186,7 +186,7 @@ ForwardLinkedList<T>::~ForwardLinkedList()
 template<class T>
 void ForwardLinkedList<T>::Insert(int i, int pos)
 {
-	if (pos <= 0)                       //ÊäÈë²»ºÏÀí
+	if (pos <= 0)                        //è¾“å…¥ä¸åˆç†
 	{
 		cout << "Please input a number more  than zero" << endl;
 		return;
@@ -201,14 +201,14 @@ void ForwardLinkedList<T>::Insert(int i, int pos)
 		LNode<T>* pt = head;
 		while (pos > 1)
 		{
-			pt = pt->next;   //ÕÒµ½Ç°Ò»¸ö½áµã
+			pt = pt->next;   //æ‰¾åˆ°å‰ä¸€ä¸ªç»“ç‚¹
 			pos--;
 		}
-		LNode<T>* newNode = new LNode<T>(i);     //´´½¨ĞÂ½áµã
-		newNode->next = pt->next;                        //²åÈëĞÂ½áµã
+		LNode<T>* newNode = new LNode<T>(i);     //åˆ›å»ºæ–°ç»“ç‚¹
+		newNode->next = pt->next;                //æ’å…¥æ–°ç»“ç‚¹
 		pt->next = newNode;
 	}
-	len++;      //Á´±í³¤¶È¼ÆÊı·û¼Ó1Ò»
+	len++;      //é“¾è¡¨é•¿åº¦è®¡æ•°ç¬¦åŠ 1ä¸€
 }
 
 template<class T>
@@ -223,23 +223,23 @@ void ForwardLinkedList<T>::Erase(int pos)
 		cout << "number input too long!" << endl;
 	else
 	{
-		LNode<T>* pt1 = head;   //ÕÒµ½É¾³ı½áµã
-		LNode<T>* pt2 = pt1;   //ÓÃÓÚÕÒµ½ÒªÉ¾³ı½áµãµÄÇ°Ò»¸ö½áµã
+		LNode<T>* pt1 = head;   //æ‰¾åˆ°åˆ é™¤ç»“ç‚¹
+		LNode<T>* pt2 = pt1;   //ç”¨äºæ‰¾åˆ°è¦åˆ é™¤ç»“ç‚¹çš„å‰ä¸€ä¸ªç»“ç‚¹
 		while (pt1 != nullptr)
 		{
 			if (pos > 1)
 			{
-				pt1 = pt1->next;   //ÏÈÈÃpt1µ½´ïÉ¾³ı½áµãÇ°Ò»¸ö½áµã
+				pt1 = pt1->next;   //å…ˆè®©pt1åˆ°è¾¾åˆ é™¤ç»“ç‚¹å‰ä¸€ä¸ªç»“ç‚¹
 				pos--;
 			}
 			else break;
 		}
-		pt2 = pt1;         //ÈÃpt2µ½´ïÉ¾³ı½áµãÇ°Ò»¸ö½áµã
-		pt1 = pt1->next;   //pt1µ½´ïÒªÉ¾³ıµÄ½áµã
+		pt2 = pt1;         //è®©pt2åˆ°è¾¾åˆ é™¤ç»“ç‚¹å‰ä¸€ä¸ªç»“ç‚¹
+		pt1 = pt1->next;   //pt1åˆ°è¾¾è¦åˆ é™¤çš„ç»“ç‚¹
 		pt2->next = pt1->next;
 		delete(pt1);
 		cout << "delete successfully" << endl;
-		len--;       //Á´±í³¤¶È¼ÆÊı·û¼õÒ»
+		len--;       //é“¾è¡¨é•¿åº¦è®¡æ•°ç¬¦å‡ä¸€
 	}
 }
 
@@ -256,25 +256,25 @@ void ForwardLinkedList<T>::Erase(int pos)
 //}
 
 template<class T>
-void ForwardLinkedList<T>::PushFront(const T& val)  //Í·²å£¬²¢¸ødata¸³Öµval
+void ForwardLinkedList<T>::PushFront(const T& val)  //å¤´æ’ï¼Œå¹¶ç»™dataèµ‹å€¼val
 {
-	Insert(val, 1);      //Í·²å
+	Insert(val, 1);       //å¤´æ’
 }
 
 template<class T>
-void ForwardLinkedList<T>::PushBack(const T& val)  //Î²²å£¬²¢¸ødata¸³Öµval
+void ForwardLinkedList<T>::PushBack(const T& val)  //å°¾æ’ï¼Œå¹¶ç»™dataèµ‹å€¼val
 {
-	Insert(val, (int)Count() + 1);           //µ÷ÓÃCountº¯Êı¼ÆËã½áµã¸öÊı£¬¼ÓÒ»ÊµÏÖÎ²²å
+	Insert(val, (int)Count() + 1);           //è°ƒç”¨Countå‡½æ•°è®¡ç®—ç»“ç‚¹ä¸ªæ•°ï¼ŒåŠ ä¸€å®ç°å°¾æ’
 }
 
 template<class T>
-void ForwardLinkedList<T>::PopFront()  //É¾³ıµÚÒ»¸ö½áµã
+void ForwardLinkedList<T>::PopFront()  //åˆ é™¤ç¬¬ä¸€ä¸ªç»“ç‚¹
 {
 	Erase(1);
 }
 
 template<class T>
-void ForwardLinkedList<T>::PopBack()  //É¾³ı×îºóÒ»¸ö½áµã
+void ForwardLinkedList<T>::PopBack()  //åˆ é™¤æœ€åä¸€ä¸ªç»“ç‚¹
 {
 	Erase(Count());
 }
@@ -282,11 +282,11 @@ void ForwardLinkedList<T>::PopBack()  //É¾³ı×îºóÒ»¸ö½áµã
 template<class T>
 size_t ForwardLinkedList<T>::Count()
 {
-	len = 0;                      //³õÊ¼»¯½áµã¼ÆÊı·ûlen
+	len = 0;                      //åˆå§‹åŒ–ç»“ç‚¹è®¡æ•°ç¬¦len
 	LNode<T>* pt = head;
 	while (pt->next != nullptr)
 	{
-		len++;                     //¼ÆËãÁ´±í½áµã¸öÊı
+		len++;                     //è®¡ç®—é“¾è¡¨ç»“ç‚¹ä¸ªæ•°
 		pt = pt->next;
 	}
 	return len;
@@ -295,12 +295,12 @@ size_t ForwardLinkedList<T>::Count()
 template<class T>
 bool ForwardLinkedList<T>::Empty()
 {
-	if (head->next == nullptr)      //Í·½áµãµÄnext(µÚÒ»¸ö½áµã)Îª¿ÕÔòÁ´±íÎª¿Õ
+	if (head->next == nullptr)      //å¤´ç»“ç‚¹çš„next(ç¬¬ä¸€ä¸ªç»“ç‚¹)ä¸ºç©ºåˆ™é“¾è¡¨ä¸ºç©º
 	{
 		cout << "The LinkedList is empty" << endl;
 		return 0;
 	}
-	else                           //·ñÔò²»Îª¿Õ
+	else                           //å¦åˆ™ä¸ä¸ºç©º
 	{
 		cout << "The LinkedList isn't empty" << endl;
 		return 1;
@@ -314,16 +314,16 @@ void ForwardLinkedList<T>::Clear()
 	{
 		return;
 	}
-	LNode<T>* pt1 = head->next;   //Ç°Ö¸Õë
+	LNode<T>* pt1 = head->next;   //å‰æŒ‡é’ˆ
 	head->next = nullptr;
-	LNode<T>* pt2 = pt1;   //ºóÖ¸Õë
+	LNode<T>* pt2 = pt1;   //åæŒ‡é’ˆ
 	while (pt2 != nullptr)
 	{
 		pt1 = pt1->next;
-		delete(pt2);       //É¾³ıÇ°Ò»¸ö½áµã
+		delete(pt2);       //åˆ é™¤å‰ä¸€ä¸ªç»“ç‚¹
 		pt2 = pt1;
 	}
-	delete(pt1);         //É¾³ıÄ©Î²½áµã
+	delete(pt1);         //åˆ é™¤æœ«å°¾ç»“ç‚¹
 	cout << "Clear successfully" << endl;
 }
 
@@ -334,8 +334,8 @@ LNode<T>* ForwardLinkedList<T>::MidFinder()
 	{
 		return nullptr;
 	}
-	LNode<T>* pt1 = head;     //¿ìÖ¸Õë
-	LNode<T>* pt2 = pt1;      //ÂıÖ¸Õë
+	LNode<T>* pt1 = head;     //å¿«æŒ‡é’ˆ
+	LNode<T>* pt2 = pt1;      //æ…¢æŒ‡é’ˆ
 	while (pt1->next != nullptr)
 	{
 		pt1 = pt1->next;

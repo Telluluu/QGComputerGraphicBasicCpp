@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include<iostream>
 #include<string>
 #include"LinkStack.h"
@@ -17,7 +17,7 @@ private:
 		/* / */ ">>>><>",
 		/* ( */ "<<<<<=",
 		/* ) */ "XXXXXX",
-	};//ÔËËã·ûÓÅÏÈ¼¶
+	};//è¿ç®—ç¬¦ä¼˜å…ˆçº§
 
 	int getNum(char c)
 	{
@@ -36,13 +36,13 @@ private:
 	{
 		using std::string
 
-			string suffix_expression = "";//´æ·Åºó×º±í´ïÊ½
-		Stack<char> op; //´æ·ÅÔËËã·ûµÄÕ»
+			string suffix_expression = "";//å­˜æ”¾åç¼€è¡¨è¾¾å¼
+		Stack<char> op; //å­˜æ”¾è¿ç®—ç¬¦çš„æ ˆ
 		op.InitStack();
 
 
 		if (isdigit(s[temp]))
-			suffix_expression += s[temp];//Èç¹ûÊäÈë±í´ïÊ½µÚtemp¸ö×Ö·ûÊÇÊı×Ö£¬Ôò´æÈëºó×º±í´ïÊ½
+			suffix_expression += s[temp];//å¦‚æœè¾“å…¥è¡¨è¾¾å¼ç¬¬tempä¸ªå­—ç¬¦æ˜¯æ•°å­—ï¼Œåˆ™å­˜å…¥åç¼€è¡¨è¾¾å¼
 		else
 		{
 			switch (s[temp])
@@ -53,18 +53,18 @@ private:
 			case ')':
 				while (!op.IsEmpty() && op.GetStackTop() != '(')
 				{
-					suffix_expression += op.GetStackTop();//´æÈëÀ¨»¡ÄÚÔËËã·û
+					suffix_expression += op.GetStackTop();//å­˜å…¥æ‹¬å¼§å†…è¿ç®—ç¬¦
 					op.Pop();
 				}
-				op.Pop();//µ¯³öÓÒÀ¨»¡
+				op.Pop();//å¼¹å‡ºå³æ‹¬å¼§
 				break;
 			default:
-				//Èç¹ûÊÇ'('ÔòÈëÕ»£¬Èç¹û²»ÊÇ'('ÇÒÓÅÏÈ¼¶´óÓÚÕ»¶¥ÔòÈëÕ»
+				//å¦‚æœæ˜¯'('åˆ™å…¥æ ˆï¼Œå¦‚æœä¸æ˜¯'('ä¸”ä¼˜å…ˆçº§å¤§äºæ ˆé¡¶åˆ™å…¥æ ˆ
 				if (op.GetStackTop() == '(' || (op.GetStackTop() != '(' && priorities[getNum(op.GetStackTop())][getNum(s[temp])] == '<'))
 				{
 					op.Push(s[temp]);
 				}
-				else //ÈôÓÅÏÈ¼¶Ğ¡ÓÚÕ»¶¥
+				else //è‹¥ä¼˜å…ˆçº§å°äºæ ˆé¡¶
 				{
 					while (priorities[getNum(op.GetStackTop())][getNum(s[temp])] == '>')
 					{

@@ -1,21 +1,21 @@
-#pragma once
+ï»¿#pragma once
 #include <iterator>
 #include<iostream>
 
 using namespace std;
 
-//¿ÉÒÔ¿¼ÂÇÈÃÕâ¸öÀàµÄÊ¹ÓÃ¸üÓÅÑÅÒ»µã
-//²»ÏëÕÛÌÚµÄÉ¾³ıÕâ¸ö¶¨Òå
-//#define LL_ITERATOR_FEATURE ///¿ÉÑ¡ [µü´úÆ÷]
+//å¯ä»¥è€ƒè™‘è®©è¿™ä¸ªç±»çš„ä½¿ç”¨æ›´ä¼˜é›…ä¸€ç‚¹
+//ä¸æƒ³æŠ˜è…¾çš„åˆ é™¤è¿™ä¸ªå®šä¹‰
+//#define LL_ITERATOR_FEATURE ///å¯é€‰ [è¿­ä»£å™¨]
 
 template<class T>
 class D_LNode
 {
 public:
-	D_LNode<T>* prev;          //Ç°ÇıÖ¸Õë
-	T data;                  //±äÁ¿
-	D_LNode<T>* next;         //ºó¼ÌÖ¸Õë
-	D_LNode<T>()                  //¹¹Ôìº¯Êı
+	D_LNode<T>* prev;          //å‰é©±æŒ‡é’ˆ
+	T data;                  //å˜é‡
+	D_LNode<T>* next;         //åç»§æŒ‡é’ˆ
+	D_LNode<T>()                  //æ„é€ å‡½æ•°
 	{
 		prev = nullptr;
 		data = 0;
@@ -103,7 +103,7 @@ public:
 template<class T>
 LinkedList<T>::LinkedList()
 {
-	D_len = 0;     //½áµã¼ÆÊı·û¼ÓÒ»
+	D_len = 0;     //ç»“ç‚¹è®¡æ•°ç¬¦åŠ ä¸€
 	D_head = new D_LNode<T>;
 	D_head->prev = nullptr;
 	D_head->data = 0;
@@ -134,7 +134,7 @@ LinkedList<T>::~LinkedList()
 template<class T>
 size_t LinkedList<T>::Count()
 {
-	D_len = 0;                      //³õÊ¼»¯½áµã¼ÆÊı·ûlen
+	D_len = 0;                      //åˆå§‹åŒ–ç»“ç‚¹è®¡æ•°ç¬¦len
 	D_LNode<T>* pt = D_head;
 	if (D_head->next == nullptr)
 		return 0;
@@ -143,7 +143,7 @@ size_t LinkedList<T>::Count()
 		while (pt->next != nullptr)
 		{
 			pt = pt->next;
-			D_len++;                     //¼ÆËãÁ´±í½áµã¸öÊı
+			D_len++;                     //è®¡ç®—é“¾è¡¨ç»“ç‚¹ä¸ªæ•°
 		}
 	}
 	return D_len;
@@ -177,22 +177,22 @@ void LinkedList<T>::Clear()
 		cout << "This LinkedList is already Cleared" << endl;
 		return;
 	}
-	D_LNode<T>* pt1 = D_head->next;   //Ç°Ö¸Õë
+	D_LNode<T>* pt1 = D_head->next;   //å‰æŒ‡é’ˆ
 	D_head->next = nullptr;
-	D_LNode<T>* pt2 = pt1;   //ºóÖ¸Õë
+	D_LNode<T>* pt2 = pt1;   //åæŒ‡é’ˆ
 	while (pt1 != nullptr)
 	{
 		pt1 = pt1->next;
-		delete(pt2);       //É¾³ıÇ°Ò»¸ö½áµã
+		delete(pt2);       //åˆ é™¤å‰ä¸€ä¸ªç»“ç‚¹
 		pt2 = pt1;
 	}
 	cout << "Clear successfully" << endl;
 }
 
 template<class T>
-void LinkedList<T>::Insert(int i, int pos)   //posÎªÒª²åÈë½áµãµÄĞòºÅ
+void LinkedList<T>::Insert(int i, int pos)   //posä¸ºè¦æ’å…¥ç»“ç‚¹çš„åºå·
 {
-	if (pos <= 0)                       //ÊäÈë²»ºÏÀí
+	if (pos <= 0)                       //è¾“å…¥ä¸åˆç†
 	{
 		cout << "Please input a number more  than zero" << endl;
 		return;
@@ -202,9 +202,9 @@ void LinkedList<T>::Insert(int i, int pos)   //posÎªÒª²åÈë½áµãµÄĞòºÅ
 		cout << "input too big" << endl;
 		return;
 	}
-	else if (pos == 1)         //Ç°²å
+	else if (pos == 1)         //å‰æ’
 	{
-		D_LNode<T>* pt = new D_LNode<T>(i);  //ĞÂ½¨Ò»¸ö½áµã
+		D_LNode<T>* pt = new D_LNode<T>(i);  //æ–°å»ºä¸€ä¸ªç»“ç‚¹
 		pt->next = D_head->next;
 		D_head->next = pt;
 		pt->prev = D_head;
@@ -216,21 +216,21 @@ void LinkedList<T>::Insert(int i, int pos)   //posÎªÒª²åÈë½áµãµÄĞòºÅ
 		D_LNode<T>* pt = D_head;
 		while (pos > 1)
 		{
-			pt = pt->next;   //ÕÒµ½Ç°Ò»¸ö½áµã
+			pt = pt->next;   //æ‰¾åˆ°å‰ä¸€ä¸ªç»“ç‚¹
 			pos--;
 		}
-		D_LNode<T>* newNode = new D_LNode<T>(i);     //´´½¨ĞÂ½áµã
-		newNode->next = pt->next;                        //²åÈëĞÂ½áµã
+		D_LNode<T>* newNode = new D_LNode<T>(i);     //åˆ›å»ºæ–°ç»“ç‚¹
+		newNode->next = pt->next;                        //æ’å…¥æ–°ç»“ç‚¹
 		pt->next = newNode;
 		newNode->prev = pt;
 		if (newNode->next != nullptr)
 			newNode->next->prev = newNode;
 	}
-	D_len++;      //Á´±í³¤¶È¼ÆÊı·û¼Ó1Ò»
+	D_len++;      //é“¾è¡¨é•¿åº¦è®¡æ•°ç¬¦åŠ 1ä¸€
 }
 
 template<class T>
-void LinkedList<T>::Erase(int pos) //posÎªÒªÉ¾³ı½áµãµÄĞòºÅ
+void LinkedList<T>::Erase(int pos) //posä¸ºè¦åˆ é™¤ç»“ç‚¹çš„åºå·
 {
 	if (pos <= 0)
 	{
@@ -241,46 +241,46 @@ void LinkedList<T>::Erase(int pos) //posÎªÒªÉ¾³ı½áµãµÄĞòºÅ
 		cout << "number input too long!" << endl;
 	else
 	{
-		D_LNode<T>* pt1 = D_head;   //ÕÒµ½É¾³ı½áµã
-		D_LNode<T>* pt2 = pt1;   //ÓÃÓÚÕÒµ½ÒªÉ¾³ı½áµãµÄÇ°Ò»¸ö½áµã
+		D_LNode<T>* pt1 = D_head;   //æ‰¾åˆ°åˆ é™¤ç»“ç‚¹
+		D_LNode<T>* pt2 = pt1;   //ç”¨äºæ‰¾åˆ°è¦åˆ é™¤ç»“ç‚¹çš„å‰ä¸€ä¸ªç»“ç‚¹
 		while (pt1 != nullptr)
 		{
 			if (pos > 1)
 			{
-				pt1 = pt1->next;   //ÏÈÈÃpt1µ½´ïÉ¾³ı½áµãÇ°Ò»¸ö½áµã
+				pt1 = pt1->next;   //å…ˆè®©pt1åˆ°è¾¾åˆ é™¤ç»“ç‚¹å‰ä¸€ä¸ªç»“ç‚¹
 				pos--;
 			}
 			else break;
 		}
-		pt2 = pt1;         //ÈÃpt2µ½´ïÉ¾³ı½áµãÇ°Ò»¸ö½áµã
-		pt1 = pt1->next;   //pt1µ½´ïÒªÉ¾³ıµÄ½áµã
+		pt2 = pt1;         //è®©pt2åˆ°è¾¾åˆ é™¤ç»“ç‚¹å‰ä¸€ä¸ªç»“ç‚¹
+		pt1 = pt1->next;   //pt1åˆ°è¾¾è¦åˆ é™¤çš„ç»“ç‚¹
 		pt2->next = pt1->next;
 		delete(pt1);
-		D_len--;       //Á´±í³¤¶È¼ÆÊı·û¼õÒ»
+		D_len--;       //é“¾è¡¨é•¿åº¦è®¡æ•°ç¬¦å‡ä¸€
 		cout << "delete successfully" << endl;
 	}
 }
 
 template<class T>
-void LinkedList<T>::PushFront(const T& val)   //Í·²å£¬²¢¸øD_data¸³Öµval
+void LinkedList<T>::PushFront(const T& val)   //å¤´æ’ï¼Œå¹¶ç»™D_dataèµ‹å€¼val
 {
 	Insert(val, 1);
 }
 
 template<class T>
-void LinkedList<T>::PushBack(const T& val)     //Î²²å£¬²¢¸øD_data¸³Öµval
+void LinkedList<T>::PushBack(const T& val)     //å°¾æ’ï¼Œå¹¶ç»™D_dataèµ‹å€¼val
 {
 	Insert(val, (int)Count() + 1);
 }
 
 template<class T>
-void LinkedList<T>::PopFront()      //É¾³ıµÚÒ»¸ö½áµã
+void LinkedList<T>::PopFront()      //åˆ é™¤ç¬¬ä¸€ä¸ªç»“ç‚¹
 {
 	Erase(1);
 }
 
 template<class T>
-void LinkedList<T>::PopBack()      //É¾³ı×îºóÒ»¸ö½áµã
+void LinkedList<T>::PopBack()      //åˆ é™¤æœ€åä¸€ä¸ªç»“ç‚¹
 {
 	Erase(Count());
 }
@@ -313,8 +313,8 @@ D_LNode<T>* LinkedList<T>::MidFinder(void)
 	{
 		return nullptr;
 	}
-	D_LNode<T>* pt1 = D_head;     //¿ìÖ¸Õë
-	D_LNode<T>* pt2 = pt1;      //ÂıÖ¸Õë
+	D_LNode<T>* pt1 = D_head;     //å¿«æŒ‡é’ˆ
+	D_LNode<T>* pt2 = pt1;      //æ…¢æŒ‡é’ˆ
 	while (pt1->next != nullptr)
 	{
 		pt1 = pt1->next;
