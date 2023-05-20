@@ -1,7 +1,16 @@
 ﻿#include<iostream>
-#include"Week3.h"
+#include"Sort.h"
 
 int main()
 {
+	using namespace std;
 
+	int* temp = new int[10]; //temp数组暂存合并的有序序列
+	int a[10] = { 1,1,4,5,1,4,9,8,1,0 };
+	//insertSort(a, 10);
+	//MergeSort(a, 0, 9, temp);
+	QuickSort_Recursion(a, 0, 9);
+	for (int i = 0; i <= 9; i++)
+		cout << "a[" << i << "]=" << a[i] << endl;
+	cout << "One Sight Gets DingZhen, Playing Genshin Makes it that!" << endl;
 }

@@ -19,9 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sort.h" />
     <ClInclude Include="Week3.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Sort.cpp" />
     <ClCompile Include="Week3.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

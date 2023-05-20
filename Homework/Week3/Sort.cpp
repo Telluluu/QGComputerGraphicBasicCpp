@@ -1,10 +1,9 @@
-﻿#pragma once
-#ifndef SORT_H_INCLUDED
-#define SORT_H_INCLUDED
 #include<vector>
 #include<algorithm>
 #include<math.h>
 #include <iostream>
+
+#include"Sort.h"
 
 /**
  *  @name        : void insertSort(int *a,int n);
@@ -16,12 +15,12 @@ void insertSort(int* a, int n)
 	for (int i = 1; i < n; i++)
 	{
 		int temp = a[i];
-		for (int j = i ; j >= 1; j--)
+		for (int j = i; j >= 1; j--)
 		{
-			if (a[j] < a[j-1])
+			if (a[j] < a[j - 1])
 			{
-				temp = a[j-1];
-				a[j-1] = a[j];
+				temp = a[j - 1];
+				a[j - 1] = a[j];
 				a[j] = temp;
 			}
 		}
@@ -62,8 +61,8 @@ void MergeSort(int* a, int begin, int end, int* temp)
 	if (begin < end)
 	{
 		int mid = (begin + end) / 2;
-		MergeSort(a, begin, mid,temp);
-		MergeSort(a, mid+1, end, temp);
+		MergeSort(a, begin, mid, temp);
+		MergeSort(a, mid + 1, end, temp);
 		MergeArray(a, begin, mid, end, temp);
 	}
 }
@@ -76,13 +75,13 @@ void MergeSort(int* a, int begin, int end, int* temp)
 void QuickSort_Recursion(int* a, int begin, int end)
 {
 	int mid;
-	if(begin >= 0 && end > 0)
-	if (begin < end)
-	{
-		mid = Partition(a, begin, end);  // 返回基准元素位置
-		QuickSort_Recursion(a, begin, mid - 1); // 左区间递归快速排序
-		QuickSort_Recursion(a, mid + 1, end); // 右区间递归快速排序
-	}
+	if (begin >= 0 && end > 0)
+		if (begin < end)
+		{
+			mid = Partition(a, begin, end);  // 返回基准元素位置
+			QuickSort_Recursion(a, begin, mid - 1); // 左区间递归快速排序
+			QuickSort_Recursion(a, mid + 1, end); // 右区间递归快速排序
+		}
 }
 
 /**
@@ -90,7 +89,7 @@ void QuickSort_Recursion(int* a, int begin, int end)
  *  @description : 快速排序（非递归版）
  *  @param       : 数组指针a，数组长度size
  */
-void QuickSort(int* a, int size);
+//void QuickSort(int* a, int size);
 
 /**
  *  @name        : void QuickSort(int *a, int begin, int end)
@@ -131,26 +130,24 @@ int Partition(int* a, int begin, int end)
  *  @description : 计数排序
  *  @param       : 数组指针a，数组长度size，数组最大值max
  */
-void CountSort(int* a, int size, int max);
+//void CountSort(int* a, int size, int max);
 
 /**
  *  @name        : void RadixCountSort(int *a,int size)
  *  @description : 基数计数排序
  *  @param       : 数组指针a，数组长度size
  */
-void RadixCountSort(int* a, int size);
+//void RadixCountSort(int* a, int size);
 
 /**
  *  @name        : void ColorSort(int *a,int size)
  *  @description : 颜色排序
  *  @param       : 数组指针a（只含0，1，2元素），数组长度size
  */
-void ColorSort(int* a, int size);
+//void ColorSort(int* a, int size);
 
 /**
  *  @name        : 自拟
  *  @description : 在一个无序序列中找到第K大/小的数
  *  @param       : 数组指针a，数组长度size
  */
-
-#endif // QUEUE_H_INCLUDED
