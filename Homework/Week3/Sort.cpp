@@ -76,12 +76,16 @@ void QuickSort_Recursion(int* a, int begin, int end)
 {
 	int mid;
 	if (begin >= 0 && end > 0)
+	{
 		if (begin < end)
 		{
 			mid = Partition(a, begin, end);  // 返回基准元素位置
 			QuickSort_Recursion(a, begin, mid - 1); // 左区间递归快速排序
 			QuickSort_Recursion(a, mid + 1, end); // 右区间递归快速排序
 		}
+	}
+	else std::cout << "invalid parameters" << std::endl;
+		
 }
 
 /**
@@ -130,7 +134,44 @@ int Partition(int* a, int begin, int end)
  *  @description : 计数排序
  *  @param       : 数组指针a，数组长度size，数组最大值max
  */
-//void CountSort(int* a, int size, int max);
+void CountSort(int* a, int size, int max)
+{
+	using namespace std;
+
+	int* b = new int[size];
+	for (int i = 0; i < size; i++)
+		b[i] = a[i];
+
+	int min=a[0];
+	for (int i = 0; i < size; i++)
+	{
+		if (a[i] < min)
+		{
+			min = a[i];
+		}
+	}
+
+	int l = max - min;
+	int* temp = new int[l + 1];
+	for (int i = 0; i < l + 1; i++)
+		temp[i] = 0;
+
+	for (int i = 0; i < size; i++)
+	{
+		temp[b[i]-min]++;//统计元素个数
+	}
+
+	for (int i = 1; i < l+1; i++)//统计数组做变形，后面的元素等于前面元素的和
+	{
+		temp[i] += temp[i-1];
+	}
+
+	for (int i = size - 1; i >= 0; i--)//倒序遍历原始数组，从统计数组中找到正确位置
+	{
+		a[temp[b[i]]-1] = b[i];
+		temp[b[i]]--;
+	}
+}
 
 /**
  *  @name        : void RadixCountSort(int *a,int size)
