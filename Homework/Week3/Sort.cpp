@@ -2,7 +2,6 @@
 #include<algorithm>
 #include<math.h>
 #include <iostream>
-
 #include"Sort.h"
 
 /**
@@ -171,6 +170,33 @@ void CountSort(int* a, int size, int max)
 		a[temp[b[i]]-1] = b[i];
 		temp[b[i]]--;
 	}
+	delete []b;
+	delete []temp;
+}
+
+/**
+ *  @name        : int maxbit(int* a, int size)
+ *  @description : 查找数据最大位数
+ *  @param       : 数组指针a，数组长度size
+ */
+int maxbit(int* a, int size)
+{
+	if (a == nullptr)
+		return 0;
+	int maxData = a[0];
+	for (int i = 0; i < size; i++)
+	{
+		if (maxData < a[i])
+			maxData = a[i];
+	}
+	int bit = 1;
+	int j = 10;
+	while (maxData >= j)
+	{
+		maxData /= 10;
+		bit++;
+	}
+	return bit;
 }
 
 /**
@@ -178,14 +204,71 @@ void CountSort(int* a, int size, int max)
  *  @description : 基数计数排序
  *  @param       : 数组指针a，数组长度size
  */
-//void RadixCountSort(int* a, int size);
+void RadixCountSort(int* a, int size)
+{
+	if (a == nullptr)
+		return;
+
+	int bit = maxbit(a, size);
+	int* temp = new int[size];
+	int* count = new int[10];
+	int k = 1;
+	int radix = 1;
+	for (int i = 1; i <= bit; i++)
+	{
+		for (int j = 0; j < 10; j++)
+			count[j] = 0;
+
+		for (int j = 0; j < size; j++)
+		{
+			k = (a[j] / radix) % 10;
+			count[k]++;
+		}
+
+		for (int j = 1; j < 10; j++)
+			count[j] += count[j - 1];
+
+		for (int j = size - 1; j >= 0; j--)
+		{
+			k = (a[j] / radix) % 10;
+			temp[count[k] - 1] = a[j];
+			count[k]--;
+		}
+		for (int j = 0; j < size; j++)
+			a[j] = temp[j];
+		radix = radix * 10;
+	}
+	delete []temp;
+	delete []count;
+}
 
 /**
  *  @name        : void ColorSort(int *a,int size)
  *  @description : 颜色排序
  *  @param       : 数组指针a（只含0，1，2元素），数组长度size
  */
-//void ColorSort(int* a, int size);
+void ColorSort(int* a, int size)
+{
+	using namespace std;
+
+	int p0, p2;
+	p0 = 0;
+	p2 = size - 1;
+	for (int i = 0; i <= p2; i++)
+	{
+		if (a[i] == 0)
+		{
+			swap(a[i], a[p0]);
+			p0++;
+		}
+		else if (a[i] == 2)
+		{
+			swap(a[i], a[p2]);
+			p2--;
+			i--;
+		}
+	}
+}
 
 /**
  *  @name        : 自拟
