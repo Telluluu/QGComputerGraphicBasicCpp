@@ -26,6 +26,11 @@ int main()
 	Time_Consuming(start);
 	PrintAfterSort(b, 10);
 
+	int c[10] = { 1,1,4,5,1,4,9,8,1,0 };
+	Time_Start(start);
+	std::cout << "The Kth small number is:" << Find_KthSmallest(c, 0, 9, 1) << std::endl;
+	Time_Consuming(start);
+
 
 	return 0;
 }

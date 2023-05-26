@@ -271,7 +271,27 @@ void ColorSort(int* a, int size)
 }
 
 /**
- *  @name        : 自拟
+ *  @name        : 自拟 int Find_Kth(int *a,int size)
  *  @description : 在一个无序序列中找到第K大/小的数
  *  @param       : 数组指针a，数组长度size
  */
+int Find_KthSmallest(int* a, int begin, int end, int k)
+{
+	using namespace std;
+	if ((k <= 0 || begin < 0 || end < 0)|| (k > end - begin + 1))
+	{
+		cout << "error param" << endl;
+		return -1;
+	}
+	if (k > 0 && k <= end - begin + 1)
+	{
+		int pos = Partition(a, begin, end);
+		if (pos - begin == k-1)
+			return a[pos];
+		else if (k - 1 > pos - begin)
+			return Find_KthSmallest(a, pos + 1, end, k - pos + begin - 1);
+		else if (k-1 < pos - begin)
+			return Find_KthSmallest(a, begin, pos - 1, k);
+	}
+
+}

@@ -66,9 +66,10 @@ void RadixCountSort(int* a, int size);
 void ColorSort(int* a, int size);
 
 /**
- *  @name        : 自拟
+ *  @name        : 自拟 int Find_Kth(int *a,int size)
  *  @description : 在一个无序序列中找到第K大/小的数
  *  @param       : 数组指针a，数组长度size
  */
+int Find_KthSmallest(int* a, int begin, int end, int k);
 
 #endif // QUEUE_H_INCLUDED
