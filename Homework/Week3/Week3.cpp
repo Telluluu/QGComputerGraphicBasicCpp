@@ -2,34 +2,55 @@
 #include"Sort.h"
 #include<Windows.h>
 #include"Timer.h"
+#include<vector>
+#include"dataCreator.h"
+
 int main()
 {
 	clock_t start = clock(); //系统时间
+	std::vector<int> data_10k;
+	std::vector<int> data_50k;
+	std::vector<int> data_200k;
+	std::vector<std::vector<int>> data_100k_100;
+	std::string name = "data.txt";
 
-	int* temp = new int[10]; //temp数组暂存合并的有序序列
-	int a[10] = { 1,1,4,5,1,4,9,8,1,0 };
-	PrintBeforeSort(a, 10);
-	Time_Start(start);
-	//insertSort(a, 10);
-	//MergeSort(a, 0, 9, temp);
-	//QuickSort_Recursion(a, 0, 9);
-	//CountSort(a, 10, 9);
-	RadixCountSort(a, 10);
-	Time_Consuming(start);
-	PrintAfterSort(a, 10);
-	std::cout << "One Sight Gets DingZhen, Playing Genshin Makes it that!" << std::endl;
 
-	int b[10] = { 1,1,0,2,0,1,0,1,2,2 };
-	PrintBeforeSort(b, 10);
-	Time_Start(start);
-	ColorSort(b, 10);
-	Time_Consuming(start);
-	PrintAfterSort(b, 10);
+	CreatRandomData(name, 10000);
+	CreatDataof_10k(data_10k);
+	CreatDataof_50k(data_50k);
+	CreatDataof_200k(data_200k);
 
-	int c[10] = { 1,1,4,5,1,4,9,8,1,0 };
-	Time_Start(start);
-	std::cout << "The Kth small number is:" << Find_KthSmallest(c, 0, 9, 1) << std::endl;
-	Time_Consuming(start);
+	int* a = new int[10000];
+	int* b = new int[50000];
+	int* c = new int[200000];
+
+	std::cout << "10k data:" << std::endl;
+	{
+		int* temp_10k = new int[10000]; //temp数组暂存合并的有序序列
+
+		std::cout << "InsertSort:" << std::endl;
+		memcpy(a, &data_10k[0], 10000);
+		Time_Start(start);
+		InsertSort(a, 10000);
+		Time_Consuming(start);
+		std::cout << std::endl;
+
+		std::cout << "MergeSort:" << std::endl;
+		memcpy(a, &data_10k[0], 10000);
+		Time_Start(start);
+		MergeSort(a, 0, 9999, temp_10k);
+		Time_Consuming(start);
+		std::cout << std::endl;
+
+		std::cout << "QuickSort_Recursion:" << std::endl;
+		memcpy(a, &data_10k[0], 10000);
+		Time_Start(start);
+		QuickSort_Recursion(a, 0, 9999);
+		Time_Consuming(start);
+		std::cout << std::endl;
+	}
+
+
 
 
 	return 0;

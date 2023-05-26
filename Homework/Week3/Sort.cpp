@@ -9,7 +9,7 @@
  *  @description : 插入排序算法
  *  @param       : 数组指针 a, 数组长度 n
  */
-void insertSort(int* a, int n)
+void InsertSort(int* a, int n)
 {
 	for (int i = 1; i < n; i++)
 	{

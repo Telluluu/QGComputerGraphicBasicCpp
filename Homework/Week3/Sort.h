@@ -7,7 +7,7 @@
  *  @description : 插入排序算法
  *  @param       : 数组指针 a, 数组长度 n
  */
-void insertSort(int* a, int n);
+void InsertSort(int* a, int n);
 
 /**
  *  @name        : void MergeArray(int *a,int begin,int mid,int end,int *temp);
