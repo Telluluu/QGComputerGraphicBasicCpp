@@ -280,14 +280,6 @@ void Control()
 
 int main()
 {
-
-
-
-
-	std::string name = "data.txt";
-
-
-	CreatRandomData(name, 10000);
 	Menu();
 	Control();
 
