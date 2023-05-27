@@ -144,7 +144,46 @@ void CreatDataof_200k(std::vector<T>& data)
  *  @param       : void
  */
 template<class T>
-void CreatDataof_100k_100(std::vector<T>& data);
+void CreatDataof_100k_100(std::vector<std::vector<T>>& data)
+{
+	using namespace std;
+	std::string name = "data_100k_100.txt";
+	CreatRandomData(name, 10000000);
+	ifstream inFile;
+	inFile.open(name, ios::in);
+	// 判断文件是否打开成功
+	if (!inFile.is_open())
+	{
+		cout << "文件打开失败！" << endl;
+		system("pause");
+		exit(-1);
+	}
+	int temp = 0;
+	while (1)
+	{
+		for(int i=0;i<100000;i++)
+		{
+			for (int j = 0; j < 100; j++)
+			{
+				// 从文件中读取第一个数据，并将其打印出来
+				inFile >> temp;
+				data[i].push_back(temp);
+				if (inFile.eof())
+				{
+					break;
+				}
+			}
+			if (inFile.eof())
+			{
+				break;
+			}
+		}
+		if (inFile.eof())
+		{
+			break;
+		}
+	}
+}
 
 
 
