@@ -85,13 +85,7 @@ void QuickSort_Recursion(int* a, int begin, int end)
 			QuickSort_Recursion(a, begin, mid - 1); // 左区间递归快速排序
 			QuickSort_Recursion(a, mid + 1, end); // 右区间递归快速排序
 		}
-	}
-	else if (begin == end) 
-	{
-		std::cout << "finished" << std::endl;
-	}
-	else std::cout << "invalid parameters" << std::endl;
-		
+	}	
 }
 
 /**

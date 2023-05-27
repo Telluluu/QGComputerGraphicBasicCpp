@@ -170,58 +170,114 @@ void test_data_200k()
 void test_data_100k_100()
 {
 	clock_t start = clock(); //系统时间
-	std::vector<std::vector<int>> data_100k_100;
-	CreatDataof_100k_100(data_100k_100);
+	std::vector<std::vector<int> > data_100k_100;
 	int(*d)[100] = new int[100000][100];
 
 	std::cout << "--------------------------------------------------------------------------------------" << std::endl;
-	std::cout << "(size)100k*100 data:" << std::endl;
+	std::cout << "(number)100k*(size)100 data:" << std::endl;
 	{
+		std::cout << "test data initializing..." << std::endl;
+		CreatDataof_100k_100(data_100k_100);
 		int* temp_100 = new int[100]; //temp数组暂存合并的有序序列
 		std::cout << std::endl;
 
 		std::cout << "InsertSort:" << std::endl;
 		for(int i=0;i<100000;i++)
-			memcpy(d, &data_100k_100[i], 100 * sizeof(int));
+			std::copy(data_100k_100[i].begin(), data_100k_100[i].end(), d[i]);
 		Time_Start(start);
 		for(int i=0;i<100000;i++)
 			InsertSort(d[i], 100);
 		Time_Consuming(start);
 		std::cout << std::endl;
 
-		/*std::cout << "MergeSort:" << std::endl;
-		memcpy(c, &data_200k[0], 200000 * sizeof(int));
+		std::cout << "MergeSort:" << std::endl;
+		for (int i = 0; i < 100000; i++)
+			std::copy(data_100k_100[i].begin(), data_100k_100[i].end(), d[i]);
 		Time_Start(start);
-		MergeSort(c, 0, 199999, temp_200k);
+		for(int i=0;i<100000;i++)
+			MergeSort(d[i], 0, 99, temp_100);
 		Time_Consuming(start);
 		std::cout << std::endl;
 
 		std::cout << "QuickSort_Recursion:" << std::endl;
-		memcpy(c, &data_200k[0], 200000 * sizeof(int));
+		for (int i = 0; i < 100000; i++)
+			std::copy(data_100k_100[i].begin(), data_100k_100[i].end(), d[i]);
 		Time_Start(start);
-		QuickSort_Recursion(c, 0, 199999);
+		for (int i = 0; i < 100000; i++)
+			QuickSort_Recursion(d[i], 0, 99);
 		Time_Consuming(start);
 		std::cout << std::endl;
 
 		std::cout << "CountSort:" << std::endl;
-		memcpy(c, &data_200k[0], 200000 * sizeof(int));
+		for (int i = 0; i < 100000; i++)
+			std::copy(data_100k_100[i].begin(), data_100k_100[i].end(), d[i]);
 		Time_Start(start);
-		CountSort(c, 200000, 9999);
+		for (int i = 0; i < 100000; i++)
+			CountSort(d[i], 100, 9999);
 		Time_Consuming(start);
 		std::cout << std::endl;
 
 		std::cout << "RadixCountSort:" << std::endl;
-		memcpy(c, &data_200k[0], 200000 * sizeof(int));
+		for (int i = 0; i < 100000; i++)
+			std::copy(data_100k_100[i].begin(), data_100k_100[i].end(), d[i]);
 		Time_Start(start);
-		RadixCountSort(c, 200000);
+		for (int i = 0; i < 100000; i++)
+			RadixCountSort(d[i], 100);
 		Time_Consuming(start);
 		std::cout << std::endl;
 
-		delete[] temp_200k;
-		delete[] c;*/
+		delete[] temp_100;
+		delete[] d;
 	}
 	std::cout << "--------------------------------------------------------------------------------------" << std::endl;
 }
+
+void Control();
+
+void Menu()
+{
+	std::cout <<
+		"1:10k amounts of data test " << std::endl <<
+		"2:50k amounts of data test " << std::endl <<
+		"3:200k amounts of data test " << std::endl <<
+		"4:100k of 100 amounts of data test " << std::endl <<
+		"5:exit" << std::endl;
+	std::cout << "please input command:";
+	Control();
+}
+
+void Control()
+{
+	int command;
+	while(1)
+	{
+		std::cin >> command;
+		switch (command)
+		{
+		case 1:test_data_10k();
+			Menu();
+			break;
+		case 2:test_data_50k();
+			Menu();
+			break;
+		case 3:test_data_200k();
+			Menu();
+			break;
+		case 4:test_data_100k_100();
+			Menu();
+			break;
+		case 5:exit(1);
+			break;
+		default:std::cout << "wrong command, please input again" << std::endl;
+			std::cin.clear();
+			std::cin.ignore(2048, '\n');
+			std::cout << "--------------------------------------------------------------------------------------" << std::endl;
+			Menu();
+			break;
+		}
+	}
+}
+
 int main()
 {
 
@@ -232,11 +288,8 @@ int main()
 
 
 	CreatRandomData(name, 10000);
-
-	//test_data_10k();
-	//test_data_50k();
-	//test_data_200k();
-	test_data_100k_100();
+	Menu();
+	Control();
 
 	return 0;
 }

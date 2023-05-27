@@ -159,30 +159,26 @@ void CreatDataof_100k_100(std::vector<std::vector<T>>& data)
 		exit(-1);
 	}
 	int temp = 0;
-	while (1)
-	{
-		for(int i=0;i<100000;i++)
+	vector<int> v;
+	for(int i=0;i<100000;i++)
 		{
 			for (int j = 0; j < 100; j++)
 			{
 				// 从文件中读取第一个数据，并将其打印出来
 				inFile >> temp;
-				data[i].push_back(temp);
+				v.push_back(temp);
 				if (inFile.eof())
 				{
 					break;
 				}
 			}
+			data.push_back(v);
+			v.clear();
 			if (inFile.eof())
 			{
 				break;
 			}
 		}
-		if (inFile.eof())
-		{
-			break;
-		}
-	}
 }
 
 
