@@ -6,13 +6,13 @@
 #include<Windows.h>
 #include<time.h>
 
-clock_t Time_Start(clock_t start_time)
+clock_t Time_Start(clock_t& start_time)
 {
 	start_time = clock();
 	return start_time;
 }
 
-clock_t Time_Consuming(clock_t start_time)
+clock_t Time_Consuming(clock_t& start_time)
 {
 	clock_t diff = clock() - start_time;
 	std::cout << "time consuming:" << diff << "ms" << std::endl;

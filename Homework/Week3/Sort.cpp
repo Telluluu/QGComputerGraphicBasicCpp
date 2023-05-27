@@ -11,6 +11,9 @@
  */
 void InsertSort(int* a, int n)
 {
+	if (a == nullptr || n <= 0)
+		return;
+
 	for (int i = 1; i < n; i++)
 	{
 		int temp = a[i];
@@ -82,6 +85,10 @@ void QuickSort_Recursion(int* a, int begin, int end)
 			QuickSort_Recursion(a, begin, mid - 1); // 左区间递归快速排序
 			QuickSort_Recursion(a, mid + 1, end); // 右区间递归快速排序
 		}
+	}
+	else if (begin == end) 
+	{
+		std::cout << "finished" << std::endl;
 	}
 	else std::cout << "invalid parameters" << std::endl;
 		
@@ -167,8 +174,8 @@ void CountSort(int* a, int size, int max)
 
 	for (int i = size - 1; i >= 0; i--)//倒序遍历原始数组，从统计数组中找到正确位置
 	{
-		a[temp[b[i]]-1] = b[i];
-		temp[b[i]]--;
+		a[temp[b[i]-min]-1] = b[i];
+		temp[b[i]-min]--;
 	}
 	delete []b;
 	delete []temp;
