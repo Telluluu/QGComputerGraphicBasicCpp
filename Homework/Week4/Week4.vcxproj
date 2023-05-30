@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BST.h" />
     <ClInclude Include="Week4.h" />
   </ItemGroup>
   <ItemGroup>
