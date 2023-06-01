@@ -8,29 +8,32 @@ int main()
 	bst.BST_init();
 	cout << "initialize suscessfully" << endl;
 
-	//bst.BST_insert(5);
-	//bst.BST_insert(3);
-	//bst.BST_insert(4);
-	//bst.BST_insert(6);
-	//bst.BST_insert(8);
-	//bst.BST_insert(7);
-	//bst.BST_insert(2);
-	//bst.BST_insert(9);
-
 	bst.BST_insert(5);
 	bst.BST_insert(3);
-	bst.BST_insert(7);
-	bst.BST_insert(2);
 	bst.BST_insert(4);
 	bst.BST_insert(6);
 	bst.BST_insert(8);
+	bst.BST_insert(7);
+	bst.BST_insert(2);
 	bst.BST_insert(9);
+
+	//bst.BST_insert(5);
+	//bst.BST_insert(3);
+	//bst.BST_insert(7);
+	//bst.BST_insert(2);
+	//bst.BST_insert(4);
+	//bst.BST_insert(6);
+	//bst.BST_insert(8);
+	//bst.BST_insert(9);
 	cout << "insert suscessfully" << endl;
 
 	bst.BST_preorderR(bst.root);
 	cout << endl;
 
 	bst.BST_inorderR(bst.root);
+	cout << endl;
+
+	bst.BST_postorderR(bst.root);
 	cout << endl;
 
 	if (bst.BST_search(0))
