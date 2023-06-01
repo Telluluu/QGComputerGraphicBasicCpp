@@ -10,6 +10,7 @@ class Node
 public:
 	Node();
 	Node(T value);
+	void print();
 public:
 	T value;
 	Node<T>* left;
@@ -28,6 +29,13 @@ Node<T>::Node(T val)
 	this->value = val;
 }
 
+template<class T>
+void Node<T>::print()
+{
+	using namespace std;
+	if(this!=nullptr)
+		cout << value << " ";
+}
 
 
 template<class T>
@@ -36,32 +44,35 @@ class BinarySortTree
 public:
 	Node<T>* root;
 
+private:
+	int is_root = 0;
+
 public:
-	BinarySortTree<T>();
+	BinarySortTree<T>() {};
 
-	int BST_init(BinarySortTree* & bst);
+	int BST_init();
 
-	int BST_insert(BinarySortTree* & bst, const T& val);
+	int BST_insert(const T& val);
 
-	int BST_delete(BinarySortTree* & bst, const T& val);
+	int BST_delete(const T& val);
 
-	int BST_search(BinarySortTree* & bst, const T& val);
+	int BST_search(const T& val);
 
-	int BST_preorderI(BinarySortTree* & bst, void (*visit)(Node<T>&));
+	int BST_preorderI(void (*visit)(Node<T>&));
 
-	int BST_preorderR(BinarySortTree* & bst, void (*visit)(Node<T>&));
+	int BST_preorderR(Node<T>*& bNode = root);
 
-	int BST_inorderI(BinarySortTree* & bst, void (*visit)(Node<T>&));
+	int BST_inorderI(void (*visit)(Node<T>&));
 
-	int BST_inorderR(BinarySortTree* & bst, void (*visit)(Node<T>&));
+	int BST_inorderR(void (*visit)(Node<T>&));
 
-	int BST_postorderI(BinarySortTree* & bst, void (*visit)(Node<T>&));
+	int BST_postorderI(void (*visit)(Node<T>&));
 
-	int BST_postorderR(BinarySortTree* & bst, void (*visit)(Node<T>&));
+	int BST_postorderR(void (*visit)(Node<T>&));
 
-	int BST_levelOrder(BinarySortTree* & bst, void (*visit)(Node<T>&));
+	int BST_levelOrder(void (*visit)(Node<T>&));
 
-	Node<T>* findMin(Node<T>* bNode)const;
+	Node<T>* findMin(Node<T>* bNode=nullptr)const;
 };
 
 /**
@@ -70,9 +81,10 @@ public:
  * @return is complete
  */
 template<class T>
-int BinarySortTree<T>::BST_init(BinarySortTree* & bst)
+int BinarySortTree<T>::BST_init()
 {
-	bst->root = new Node<T>;
+	root = new Node<T>;
+	is_root = 1;
 	return 1;
 }
 
@@ -83,21 +95,26 @@ int BinarySortTree<T>::BST_init(BinarySortTree* & bst)
  * @return is successful
  */
 template<class T>
-int BinarySortTree<T>::BST_insert(BinarySortTree* & bst,const T& val)
+int BinarySortTree<T>::BST_insert(const T& val)
 {
 	using namespace std;
-
-	Node<T>* ptr = bst->root;
+	Node<T>* ptr = root;
+	if (this->is_root == 1)
+	{
+		root->value = val;
+		is_root = 0;
+		return 1;
+	}
 	if (ptr == nullptr)
 	{
 		cout << "need to be initialized" << endl;
 		return 0;
 	}
-	while (ptr->left != nullptr || ptr->right != nullptr)
+	while (1)
 	{
 		if (val == ptr->value)
 		{
-			cout << "this data has already existed" << endl;
+			cout <<"\""<<val<<"\"" << "has already existed" << endl;
 			return 1;
 		}
 		else if (val < ptr->value)
@@ -111,6 +128,7 @@ int BinarySortTree<T>::BST_insert(BinarySortTree* & bst,const T& val)
 				Node<T>* newNode = new Node<T>(val);
 				ptr->left = newNode;
 				ptr = ptr->left;
+				return 1;
 			}
 		}
 		else if (val > ptr->value)
@@ -124,6 +142,7 @@ int BinarySortTree<T>::BST_insert(BinarySortTree* & bst,const T& val)
 				Node<T>* newNode = new Node<T>(val);
 				ptr->right = newNode;
 				ptr = ptr->right;
+				return 1;
 			}
 		}
 	}
@@ -131,7 +150,8 @@ int BinarySortTree<T>::BST_insert(BinarySortTree* & bst,const T& val)
 }
 
 template<class T>
-Node<T>* BinarySortTree<T>::findMin(Node<T>* bNode) const {
+Node<T>* BinarySortTree<T>::findMin(Node<T>* bNode) const
+{
 	if (bNode != nullptr) {
 		while (bNode->left !=nullptr) {
 			bNode = bNode->left;
@@ -148,11 +168,11 @@ Node<T>* BinarySortTree<T>::findMin(Node<T>* bNode) const {
  * @return is successful
  */
 template<class T>
-int BinarySortTree<T>::BST_delete(BinarySortTree* &bst, const T& val)
+int BinarySortTree<T>::BST_delete(const T& val)
 {
 	using namespace std;
 	int exist = 0;
-	Node<T>* ptr = bst->root;
+	Node<T>* ptr = root;
 	Node<T>* temp = ptr;
 	if (ptr == nullptr)
 	{
@@ -161,7 +181,7 @@ int BinarySortTree<T>::BST_delete(BinarySortTree* &bst, const T& val)
 	}
 	else
 	{
-		while (ptr -> left != nullptr || ptr->right != nullptr)
+		while (ptr != nullptr)
 		{
 			if (val == ptr->value)
 			{
@@ -209,11 +229,11 @@ int BinarySortTree<T>::BST_delete(BinarySortTree* &bst, const T& val)
 				{
 					Node<T>* oldNode = findMin(ptr);
 					int temp_val = oldNode->value;
-					BST_delete(bst, temp_val);
+					BST_delete(temp_val);
 					ptr->value = temp_val;
 				}
 			}
-			else if (ptr->right == ptr)
+			else if (temp->right == ptr)
 			{
 				if (ptr->left == nullptr && ptr->right == nullptr)
 				{
@@ -234,7 +254,7 @@ int BinarySortTree<T>::BST_delete(BinarySortTree* &bst, const T& val)
 				{
 					Node<T>* oldNode = findMin(ptr);
 					int temp_val = oldNode->value;
-					BST_delete(bst, temp_val);
+					BST_delete(temp_val);
 					ptr->value = temp_val;
 				}
 			}
@@ -250,7 +270,35 @@ int BinarySortTree<T>::BST_delete(BinarySortTree* &bst, const T& val)
  * @return is exist
  */
 template<class T>
-int BinarySortTree<T>::BST_search(BinarySortTree* &bst,const T& val);
+int BinarySortTree<T>::BST_search(const T& val)
+{
+	using namespace std;
+	Node<T>* ptr = root;
+	if (root == nullptr)
+	{
+		cout << "the tree is empty" << endl;
+	}
+	else
+	{
+		while(ptr!=nullptr)
+		{
+			if (ptr->value == val)
+				return 1;
+			if ((val < ptr->value) && (ptr->left != nullptr))
+			{
+				ptr = ptr->left;
+			}
+			else if ((val > ptr->value) && (ptr->right != nullptr))
+			{
+				ptr = ptr->right;
+			}
+			else
+			{
+				return 0;
+			}
+		}
+	}
+}
 
 /**
  * BST preorder traversal without recursion
@@ -259,7 +307,10 @@ int BinarySortTree<T>::BST_search(BinarySortTree* &bst,const T& val);
  * @return is successful
  */
 template<class T>
-int BinarySortTree<T>::BST_preorderI(BinarySortTree* &bst, void (*visit)(Node<T>&));
+int BinarySortTree<T>::BST_preorderI(void (*visit)(Node<T>&))
+{
+
+}
 
 /**
  * BST preorder traversal with recursion
@@ -268,7 +319,21 @@ int BinarySortTree<T>::BST_preorderI(BinarySortTree* &bst, void (*visit)(Node<T>
  * @return is successful
  */
 template<class T>
-int BinarySortTree<T>::BST_preorderR(BinarySortTree* &bst, void (*visit)(Node<T>&));
+int BinarySortTree<T>::BST_preorderR(Node<T>*& bNode)
+{
+	using namespace std;
+	if (bNode != nullptr)
+	{
+		cout << bNode->value << " ";
+		if (bNode->left != nullptr)
+			BST_preorderR(bNode->left);
+		if (bNode->right != nullptr)
+			BST_preorderR(bNode->right);
+		return 1;
+	}
+	else 
+		return 0;
+}
 
 /**
  * BST inorder traversal without recursion
@@ -277,7 +342,10 @@ int BinarySortTree<T>::BST_preorderR(BinarySortTree* &bst, void (*visit)(Node<T>
  * @return is successful
  */
 template<class T>
-int BinarySortTree<T>::BST_inorderI(BinarySortTree* &bst, void (*visit)(Node<T>&));
+int BinarySortTree<T>::BST_inorderI(void (*visit)(Node<T>&))
+{
+
+}
 
 /**
  * BST inorder traversal with recursion
@@ -286,7 +354,10 @@ int BinarySortTree<T>::BST_inorderI(BinarySortTree* &bst, void (*visit)(Node<T>&
  * @return is successful
  */
 template<class T>
-int BinarySortTree<T>::BST_inorderR(BinarySortTree* &bst, void (*visit)(Node<T>&));
+int BinarySortTree<T>::BST_inorderR(void (*visit)(Node<T>&))
+{
+
+}
 
 /**
  * BST preorder traversal without recursion
@@ -295,7 +366,10 @@ int BinarySortTree<T>::BST_inorderR(BinarySortTree* &bst, void (*visit)(Node<T>&
  * @return is successful
  */
 template<class T>
-int BinarySortTree<T>::BST_postorderI(BinarySortTree* &bst, void (*visit)(Node<T>&));
+int BinarySortTree<T>::BST_postorderI(void (*visit)(Node<T>&))
+{
+
+}
 
 /**
  * BST postorder traversal with recursion
@@ -304,7 +378,10 @@ int BinarySortTree<T>::BST_postorderI(BinarySortTree* &bst, void (*visit)(Node<T
  * @return is successful
  */
 template<class T>
-int BinarySortTree<T>::BST_postorderR(BinarySortTree* &bst, void (*visit)(Node<T>&));
+int BinarySortTree<T>::BST_postorderR(void (*visit)(Node<T>&))
+{
+
+}
 
 /**
  * BST level order traversal
@@ -313,5 +390,8 @@ int BinarySortTree<T>::BST_postorderR(BinarySortTree* &bst, void (*visit)(Node<T
  * @return is successful
  */
 template<class T>
-int BinarySortTree<T>::BST_levelOrder(BinarySortTree* &bst , void (*visit)(Node<T>&));
+int BinarySortTree<T>::BST_levelOrder(void (*visit)(Node<T>&))
+{
+
+}
 #endif // !_BST_H
