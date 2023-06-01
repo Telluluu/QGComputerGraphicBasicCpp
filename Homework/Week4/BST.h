@@ -10,7 +10,7 @@ class Node
 public:
 	Node();
 	Node(T value);
-	void print();
+	T print()const;
 public:
 	T value;
 	Node<T>* left;
@@ -30,11 +30,14 @@ Node<T>::Node(T val)
 }
 
 template<class T>
-void Node<T>::print()
+T Node<T>::print()const
 {
 	using namespace std;
-	if(this!=nullptr)
+	if (this != nullptr)
+	{
 		cout << value << " ";
+	}
+	return value;
 }
 
 
@@ -64,7 +67,7 @@ public:
 
 	int BST_inorderI(void (*visit)(Node<T>&));
 
-	int BST_inorderR(void (*visit)(Node<T>&));
+	int BST_inorderR(Node<T>*& bNode);
 
 	int BST_postorderI(void (*visit)(Node<T>&));
 
@@ -315,7 +318,7 @@ int BinarySortTree<T>::BST_preorderI(void (*visit)(Node<T>&))
 /**
  * BST preorder traversal with recursion
  * @param BinarySortTreePtr BST
- * @param (*visit) callback
+ * @param Node<T>*& bNode
  * @return is successful
  */
 template<class T>
@@ -350,13 +353,24 @@ int BinarySortTree<T>::BST_inorderI(void (*visit)(Node<T>&))
 /**
  * BST inorder traversal with recursion
  * @param BinarySortTreePtr BST
- * @param (*visit) callback
+ * @param Node<T>*& bNode
  * @return is successful
  */
 template<class T>
-int BinarySortTree<T>::BST_inorderR(void (*visit)(Node<T>&))
+int BinarySortTree<T>::BST_inorderR(Node<T>*& bNode)
 {
+	using namespace std;
+	if (bNode->left != nullptr)
+	{
+		BST_inorderR(bNode->left);
 
+	}
+	bNode->print();
+	if (bNode->right != nullptr)
+	{
+		BST_inorderR(bNode->right);
+	}
+	return 1;
 }
 
 /**
