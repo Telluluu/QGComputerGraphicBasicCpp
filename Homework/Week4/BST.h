@@ -3,6 +3,8 @@
 #define _BST_H
 
 #include<iostream>
+#include<stack>
+#include<queue>
 
 template<class T>
 class Node
@@ -11,10 +13,21 @@ public:
 	Node();
 	Node(T value);
 	T print()const;
+	T print(Node<T>* bNode)const;
+	void print_child()const;
+	void print_child(Node<T>* bNode)const;
+
+public:
+	//a mark used for postorder traversal without recursion
+	int is_visited;
+
+
 public:
 	T value;
 	Node<T>* left;
 	Node<T>* right;
+
+
 };
 
 template<class T>
@@ -32,20 +45,55 @@ Node<T>::Node(T val)
 template<class T>
 T Node<T>::print()const
 {
-	using namespace std;
 	if (this != nullptr)
 	{
-		cout << value << " ";
+		std::cout << value << " ";
+		return value;
 	}
-	return value;
+	return 0;
 }
 
+template<class T>
+T Node<T>::print(Node<T>* bNode)const
+{
+	if (bNode != nullptr)
+	{
+		std::cout << bNode->value << " ";
+		return bNode->value;
+	}
+	return 0;
+}
+
+template<class T>
+void Node<T>::print_child()const
+{
+	if (this != nullptr)
+	{
+		if (this->left != nullptr)
+			print(this->left);
+		if (this->right != nullptr)
+			print(this->right);
+	}
+}
+
+template<class T>
+void Node<T>::print_child(Node<T>* bNode)const
+{
+	using namespace std;
+	if (bNode != nullptr)
+	{
+		if (bNode->left != nullptr)
+			print(bNode->left);
+		if (bNode->right != nullptr)
+			print(bNode->right);
+	}
+}
 
 template<class T>
 class BinarySortTree
 {
 public:
-	Node<T>* root;
+	Node<T>* root=nullptr;
 
 private:
 	int is_root = 0;
@@ -59,38 +107,57 @@ public:
 
 	int BST_delete(const T& val);
 
-	int BST_search(const T& val);
+	int BST_search(const T& val)const;
 
-	int BST_preorderI(void (*visit)(Node<T>&));
+	int BST_preorderI()const;
 
-	int BST_preorderR(Node<T>*& bNode = root);
+	int BST_preorderR(Node<T>*& bNode)const;
 
-	int BST_inorderI(void (*visit)(Node<T>&));
+	int BST_inorderI()const;
 
-	int BST_inorderR(Node<T>*& bNode = root);
+	int BST_inorderR(Node<T>*& bNode)const;
 
-	int BST_postorderI(void (*visit)(Node<T>&));
+	int BST_postorderI()const;
 
-	int BST_postorderR(Node<T>*& bNode = root);
+	int BST_postorderR(Node<T>*& bNode)const;
 
-	int BST_levelOrder(void (*visit)(Node<T>&));
+	int BST_levelOrder()const;
+
+	int BST_destroy(Node<T>*& ptr);
 
 	Node<T>* findMin(Node<T>* bNode=nullptr)const;
 };
 
 /**
  * BST initialize
- * @param BinarySortTreePtr BST
+ * @param void
  * @return is complete
  */
 template<class T>
 int BinarySortTree<T>::BST_init()
 {
+	BST_destroy(root);
 	root = new Node<T>;
 	is_root = 1;
 	return 1;
 }
 
+/**
+ * BST destroy
+ * @param void
+ * @return is complete
+ */
+template<class T>
+int BinarySortTree<T>::BST_destroy(Node<T>*& ptr)
+{
+	if (ptr == NULL)
+	{
+		return 1;
+	}
+	BST_destroy(ptr->left);
+	BST_destroy(ptr->right);
+	delete ptr;
+}
 /**
  * BST insert
  * @param BinarySortTreePtr BST
@@ -173,13 +240,12 @@ Node<T>* BinarySortTree<T>::findMin(Node<T>* bNode) const
 template<class T>
 int BinarySortTree<T>::BST_delete(const T& val)
 {
-	using namespace std;
 	int exist = 0;
 	Node<T>* ptr = root;
 	Node<T>* temp = ptr;
 	if (ptr == nullptr)
 	{
-		cout << "need to be initialized" << endl;
+		std::cout << "need to be initialized" << std::endl;
 		return 0;
 	}
 	else
@@ -193,24 +259,31 @@ int BinarySortTree<T>::BST_delete(const T& val)
 			}
 			else if (val < ptr->value)
 			{
-				if (val == ptr->left->value)
-					temp = ptr;
+				if (ptr->left != nullptr)
+					if (val == ptr->left->value)
+						temp = ptr;
 				ptr = ptr->left;
 			}
 			else if (val > ptr->value)
 			{
-				if (val == ptr->right->value)
-					temp = ptr;
+				if(ptr->right!=nullptr)
+					if (val == ptr->right->value)
+						temp = ptr;
 				ptr = ptr->right;
 			}
 		}
 		if (exist == 0)
 		{
-			cout << "the element doesn't exist" << endl;
+			std::cout << "the element doesn't exist" << std::endl;
 			return 0;
 		}
 		else
 		{
+			if (ptr == root)
+			{
+				std::cout << "the root can't be deleted" << std::endl;
+				return 0;
+			}
 			if (temp->left == ptr)
 			{
 				if (ptr->left == nullptr && ptr->right == nullptr)
@@ -263,6 +336,7 @@ int BinarySortTree<T>::BST_delete(const T& val)
 			}
 		}
 	}
+	std::cout<<"Delete Successfully" << std::endl;
 	return 1;
 }
 
@@ -273,20 +347,22 @@ int BinarySortTree<T>::BST_delete(const T& val)
  * @return is exist
  */
 template<class T>
-int BinarySortTree<T>::BST_search(const T& val)
+int BinarySortTree<T>::BST_search(const T& val)const
 {
-	using namespace std;
 	Node<T>* ptr = root;
 	if (root == nullptr)
 	{
-		cout << "the tree is empty" << endl;
+		std::cout << "the tree is empty" << std::endl;
 	}
 	else
 	{
 		while(ptr!=nullptr)
 		{
 			if (ptr->value == val)
+			{
+				std::cout << "\"" << val << "\" exists" << std::endl;
 				return 1;
+			}
 			if ((val < ptr->value) && (ptr->left != nullptr))
 			{
 				ptr = ptr->left;
@@ -297,6 +373,7 @@ int BinarySortTree<T>::BST_search(const T& val)
 			}
 			else
 			{
+				std::cout << "\"" << val << "\" doesn't exist" << std::endl;
 				return 0;
 			}
 		}
@@ -310,9 +387,34 @@ int BinarySortTree<T>::BST_search(const T& val)
  * @return is successful
  */
 template<class T>
-int BinarySortTree<T>::BST_preorderI(void (*visit)(Node<T>&))
+int BinarySortTree<T>::BST_preorderI()const
 {
+	if (root == nullptr)
+	{
+		std::cout << "BinarySortTree is empty" << std::endl;
+		return 0;
+	}
 
+	std::stack<Node<T>*> q;
+	Node<T>* ptr = root;
+
+	while (ptr != nullptr || q.empty() == false)
+	{
+		if (ptr != nullptr)
+		{
+			ptr->print();
+			q.push(ptr);
+			ptr = ptr->left;
+		}
+		else
+		{
+			ptr = q.top();
+			q.pop();
+			ptr = ptr->right;
+		}
+	}
+	std::cout << std::endl;
+	return 1;
 }
 
 /**
@@ -322,9 +424,14 @@ int BinarySortTree<T>::BST_preorderI(void (*visit)(Node<T>&))
  * @return is successful
  */
 template<class T>
-int BinarySortTree<T>::BST_preorderR(Node<T>*& bNode)
+int BinarySortTree<T>::BST_preorderR(Node<T>*& bNode)const
 {
-	using namespace std;
+	if (root == nullptr)
+	{
+		std::cout << "BinarySortTree is empty" << std::endl;
+		return 0;
+	}
+
 	if (bNode != nullptr)
 	{
 		bNode->print();
@@ -341,9 +448,34 @@ int BinarySortTree<T>::BST_preorderR(Node<T>*& bNode)
  * @return is successful
  */
 template<class T>
-int BinarySortTree<T>::BST_inorderI(void (*visit)(Node<T>&))
+int BinarySortTree<T>::BST_inorderI()const
 {
+	if (root == nullptr)
+	{
+		std::cout << "BinarySortTree is empty" << std::endl;
+		return 0;
+	}
 
+	std::stack<Node<T>*> q;
+	Node<T>* ptr = root;
+
+	while (ptr != nullptr || q.empty() == false)
+	{
+		if (ptr != nullptr)
+		{
+			q.push(ptr);
+			ptr = ptr->left;
+		}
+		else
+		{
+			ptr = q.top();
+			q.pop();
+			ptr->print();
+			ptr = ptr->right;
+		}
+	}
+	std::cout << std::endl;
+	return 1;
 }
 
 /**
@@ -353,9 +485,14 @@ int BinarySortTree<T>::BST_inorderI(void (*visit)(Node<T>&))
  * @return is successful
  */
 template<class T>
-int BinarySortTree<T>::BST_inorderR(Node<T>*& bNode)
+int BinarySortTree<T>::BST_inorderR(Node<T>*& bNode)const
 {
-	using namespace std;
+	if (root == nullptr)
+	{
+		std::cout << "BinarySortTree is empty" << std::endl;
+		return 0;
+	}
+
 	if (bNode != nullptr)
 	{
 		BST_inorderR(bNode->left);
@@ -372,9 +509,48 @@ int BinarySortTree<T>::BST_inorderR(Node<T>*& bNode)
  * @return is successful
  */
 template<class T>
-int BinarySortTree<T>::BST_postorderI(void (*visit)(Node<T>&))
+int BinarySortTree<T>::BST_postorderI()const
 {
+	if (root == nullptr)
+	{
+		std::cout << "BinarySortTree is empty" << std::endl;
+		return 0;
+	}
 
+	std::stack<Node<T>*> s;
+	Node<T>* ptr = root;
+	Node<T>* q;
+	Node<T>* t;
+
+	while (ptr || s.empty() == false)
+	{
+		while (ptr != nullptr)
+		{
+			s.push(ptr);
+			ptr->is_visited = 0;
+			ptr = ptr->left;
+		}
+		if (s.empty() == false)
+		{
+			t = s.top();
+			q = s.top();
+			s.pop();
+			if (t->is_visited == 0)
+			{
+				s.push(q);
+				t->is_visited = 1;
+				ptr = q->right;
+			}
+			else
+			{
+				t->print();
+				ptr = nullptr;
+			}
+		}
+
+	}
+	std::cout << std::endl;
+	return 1;
 }
 
 /**
@@ -384,9 +560,14 @@ int BinarySortTree<T>::BST_postorderI(void (*visit)(Node<T>&))
  * @return is successful
  */
 template<class T>
-int BinarySortTree<T>::BST_postorderR(Node<T>*& bNode)
+int BinarySortTree<T>::BST_postorderR(Node<T>*& bNode)const
 {
-	using namespace std;
+	if (root == nullptr)
+	{
+		std::cout << "BinarySortTree is empty" << std::endl;
+		return 0;
+	}
+
 	if (bNode != nullptr)
 	{
 		BST_postorderR(bNode->left);
@@ -403,8 +584,29 @@ int BinarySortTree<T>::BST_postorderR(Node<T>*& bNode)
  * @return is successful
  */
 template<class T>
-int BinarySortTree<T>::BST_levelOrder(void (*visit)(Node<T>&))
+int BinarySortTree<T>::BST_levelOrder()const
 {
+	if (root == nullptr)
+	{
+		std::cout << "BinarySortTree is empty" << std::endl;
+		return 0;
+	}
 
+	std::queue<Node<T>*> q;
+
+	if (root != nullptr)
+		q.push(root);
+
+	while (q.empty() == false)
+	{
+		q.front()->print();
+		if (q.front()->left != nullptr)
+			q.push(q.front()->left);
+		if (q.front()->right != nullptr)
+			q.push(q.front()->right);
+		q.pop();
+	}
+	std::cout << std::endl;
+	return 1;
 }
 #endif // !_BST_H
