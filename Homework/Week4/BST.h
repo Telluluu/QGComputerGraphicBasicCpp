@@ -26,18 +26,16 @@ public:
 	T value;
 	Node<T>* left;
 	Node<T>* right;
-
-
 };
 
 template<class T>
 Node<T>::Node()
-	:left(nullptr), right(nullptr)
+	:left(nullptr), right(nullptr),is_visited(0)
 {}
 
 template<class T>
 Node<T>::Node(T val)
-	:left(nullptr),right(nullptr)
+	:left(nullptr),right(nullptr),is_visited(0)
 {
 	this->value = val;
 }
@@ -99,7 +97,9 @@ private:
 	int is_root = 0;
 
 public:
-	BinarySortTree<T>() {};
+	BinarySortTree<T>() {}
+
+	~BinarySortTree<T>() { BST_destroy(root); }
 
 	int BST_init();
 
@@ -150,12 +150,15 @@ int BinarySortTree<T>::BST_init()
 template<class T>
 int BinarySortTree<T>::BST_destroy(Node<T>*& ptr)
 {
-	if (ptr == NULL)
+	if (ptr == nullptr)
 	{
 		return 1;
 	}
 	BST_destroy(ptr->left);
 	BST_destroy(ptr->right);
+	ptr->left = nullptr;
+	ptr->right = nullptr;
+	root = nullptr;
 	delete ptr;
 }
 /**

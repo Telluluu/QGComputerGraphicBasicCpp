@@ -12,7 +12,8 @@ void Menu()
 		"5:Preorder Traversal " << std::endl <<
 		"6:Inorder Traversal " << std::endl <<
 		"7:Postorder Traversal " << std::endl <<
-		"8:Level Order Traversal: " << std::endl<<
+		"8:Level Order Traversal: " << std::endl <<
+		"9:Clear the BinarySortTree" << std::endl << 
 		"0:exit" << std::endl;
 	std::cout << "--------------------------------------------------------------------------------------" << std::endl;
 	std::cout << "please input command:";
@@ -141,6 +142,12 @@ int main()
 				Menu();
 				break;
 
+			case'9':
+				bst.BST_destroy(bst.root);
+				std::cout << "Clear Successfully" << std::endl;	
+				std::cout << std::endl << std::endl << std::endl;
+				Menu();
+				break;
 			case '0': exit(0);
 
 			default:
