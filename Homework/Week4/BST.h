@@ -29,19 +29,19 @@ public:
 };
 
 template<class T>
-Node<T>::Node()
+inline Node<T>::Node()
 	:left(nullptr), right(nullptr),is_visited(0)
 {}
 
 template<class T>
-Node<T>::Node(T val)
+inline Node<T>::Node(T val)
 	:left(nullptr),right(nullptr),is_visited(0)
 {
 	this->value = val;
 }
 
 template<class T>
-T Node<T>::print()const
+inline T Node<T>::print()const
 {
 	if (this != nullptr)
 	{
@@ -52,7 +52,7 @@ T Node<T>::print()const
 }
 
 template<class T>
-T Node<T>::print(Node<T>* bNode)const
+inline T Node<T>::print(Node<T>* bNode)const
 {
 	if (bNode != nullptr)
 	{
@@ -63,7 +63,7 @@ T Node<T>::print(Node<T>* bNode)const
 }
 
 template<class T>
-void Node<T>::print_child()const
+inline void Node<T>::print_child()const
 {
 	if (this != nullptr)
 	{
@@ -75,7 +75,7 @@ void Node<T>::print_child()const
 }
 
 template<class T>
-void Node<T>::print_child(Node<T>* bNode)const
+inline void Node<T>::print_child(Node<T>* bNode)const
 {
 	using namespace std;
 	if (bNode != nullptr)
@@ -134,7 +134,7 @@ public:
  * @return is complete
  */
 template<class T>
-int BinarySortTree<T>::BST_init()
+inline int BinarySortTree<T>::BST_init()
 {
 	BST_destroy(root);
 	root = new Node<T>;
@@ -148,7 +148,7 @@ int BinarySortTree<T>::BST_init()
  * @return is complete
  */
 template<class T>
-int BinarySortTree<T>::BST_destroy(Node<T>*& ptr)
+inline int BinarySortTree<T>::BST_destroy(Node<T>*& ptr)
 {
 	if (ptr == nullptr)
 	{
@@ -168,7 +168,7 @@ int BinarySortTree<T>::BST_destroy(Node<T>*& ptr)
  * @return is successful
  */
 template<class T>
-int BinarySortTree<T>::BST_insert(const T& val)
+inline int BinarySortTree<T>::BST_insert(const T& val)
 {
 	using namespace std;
 	Node<T>* ptr = root;
@@ -223,7 +223,7 @@ int BinarySortTree<T>::BST_insert(const T& val)
 }
 
 template<class T>
-Node<T>* BinarySortTree<T>::findMin(Node<T>* bNode) const
+inline Node<T>* BinarySortTree<T>::findMin(Node<T>* bNode) const
 {
 	if (bNode != nullptr) {
 		while (bNode->left !=nullptr) {
@@ -241,7 +241,7 @@ Node<T>* BinarySortTree<T>::findMin(Node<T>* bNode) const
  * @return is successful
  */
 template<class T>
-int BinarySortTree<T>::BST_delete(const T& val)
+inline int BinarySortTree<T>::BST_delete(const T& val)
 {
 	int exist = 0;
 	Node<T>* ptr = root;
@@ -350,7 +350,7 @@ int BinarySortTree<T>::BST_delete(const T& val)
  * @return is exist
  */
 template<class T>
-int BinarySortTree<T>::BST_search(const T& val)const
+inline int BinarySortTree<T>::BST_search(const T& val)const
 {
 	Node<T>* ptr = root;
 	if (root == nullptr)
@@ -390,7 +390,7 @@ int BinarySortTree<T>::BST_search(const T& val)const
  * @return is successful
  */
 template<class T>
-int BinarySortTree<T>::BST_preorderI()const
+inline int BinarySortTree<T>::BST_preorderI()const
 {
 	if (root == nullptr)
 	{
@@ -427,7 +427,7 @@ int BinarySortTree<T>::BST_preorderI()const
  * @return is successful
  */
 template<class T>
-int BinarySortTree<T>::BST_preorderR(Node<T>*& bNode)const
+inline int BinarySortTree<T>::BST_preorderR(Node<T>*& bNode)const
 {
 	if (root == nullptr)
 	{
@@ -451,7 +451,7 @@ int BinarySortTree<T>::BST_preorderR(Node<T>*& bNode)const
  * @return is successful
  */
 template<class T>
-int BinarySortTree<T>::BST_inorderI()const
+inline int BinarySortTree<T>::BST_inorderI()const
 {
 	if (root == nullptr)
 	{
@@ -488,7 +488,7 @@ int BinarySortTree<T>::BST_inorderI()const
  * @return is successful
  */
 template<class T>
-int BinarySortTree<T>::BST_inorderR(Node<T>*& bNode)const
+inline int BinarySortTree<T>::BST_inorderR(Node<T>*& bNode)const
 {
 	if (root == nullptr)
 	{
@@ -512,7 +512,7 @@ int BinarySortTree<T>::BST_inorderR(Node<T>*& bNode)const
  * @return is successful
  */
 template<class T>
-int BinarySortTree<T>::BST_postorderI()const
+inline int BinarySortTree<T>::BST_postorderI()const
 {
 	if (root == nullptr)
 	{
@@ -563,7 +563,7 @@ int BinarySortTree<T>::BST_postorderI()const
  * @return is successful
  */
 template<class T>
-int BinarySortTree<T>::BST_postorderR(Node<T>*& bNode)const
+inline int BinarySortTree<T>::BST_postorderR(Node<T>*& bNode)const
 {
 	if (root == nullptr)
 	{
@@ -587,7 +587,7 @@ int BinarySortTree<T>::BST_postorderR(Node<T>*& bNode)const
  * @return is successful
  */
 template<class T>
-int BinarySortTree<T>::BST_levelOrder()const
+inline int BinarySortTree<T>::BST_levelOrder()const
 {
 	if (root == nullptr)
 	{
