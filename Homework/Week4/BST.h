@@ -45,8 +45,8 @@ inline T Node<T>::print()const
 {
 	if (this != nullptr)
 	{
-		std::cout << value << " ";
-		return value;
+		std::cout << this->value << " ";
+		return this->value;
 	}
 	return 0;
 }
